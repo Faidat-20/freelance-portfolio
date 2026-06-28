@@ -97,7 +97,7 @@ export default function FAQ() {
               className="text-slate-500 mb-8"
               style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
             >
-              Everything you need to know before reaching out —
+              Everything you need to know before reaching out
               answered honestly.
             </p>
             <div className="p-6 bg-indigo-50 border border-indigo-100 rounded-2xl">

@@ -6,23 +6,23 @@ export const FEATURED_PROJECTS = [
     title: 'Jomi Global',
     subtitle: 'Luxury Brand E-Commerce Platform',
     description:
-      'A full-stack luxury e-commerce platform for an international fashion brand — built from the ground up with custom admin infrastructure, Flutterwave payment processing, and real-time revenue analytics.',
+      'A full-stack luxury e-commerce platform for an international fashion brand built from the ground up with custom admin infrastructure, Flutterwave payment processing, and real-time revenue analytics.',
     problem:
-      'Jomi Global needed more than a storefront. They required a complete business system: a polished customer-facing shop, a protected admin dashboard for inventory and order management, and real-time revenue visibility — all under one codebase.',
+      'Jomi Global needed more than a storefront. They required a complete business system: a polished customer-facing shop, a protected admin dashboard for inventory and order management, and real-time revenue visibility all under one codebase.',
     solution:
       'Built a PHP + MySQL full-stack application with a layered architecture: a public-facing luxury storefront, a protected admin panel with RBAC, Flutterwave payment integration with webhook handling, and a live revenue statistics dashboard.',
     stack: ['PHP', 'JavaScript', 'MySQL', 'Flutterwave', 'HTML/CSS'],
     highlights: [
       'Custom admin dashboard with revenue statistics and charts',
       'Flutterwave payment gateway with webhook verification',
-      'Role-based access control — admin vs customer',
+      'Role-based access control admin vs customer',
       'User account system with order history',
       'Inventory management with stock tracking',
       'Responsive luxury UI built for premium feel',
     ],
     architecture: [
       'MVC-style PHP architecture for clean separation of concerns',
-      'MySQL with normalised schema — products, orders, users, payments',
+      'MySQL with normalised schema; products, orders, users, payments',
       'Flutterwave webhook handler with HMAC signature verification',
       'Server-side session authentication with role guards',
       'Admin panel protected by middleware-style access checks',
@@ -39,9 +39,9 @@ export const FEATURED_PROJECTS = [
     title: 'Lip Care & Beauty Store',
     subtitle: 'Full E-Commerce Platform for Nigerian Beauty Brand',
     description:
-      'A complete multi-page e-commerce platform for a Nigerian lip care and beauty brand — featuring cart management, user authentication, WhatsApp ordering, and Nigeria-wide delivery logic.',
+      'A complete multi-page e-commerce platform for a Nigerian lip care and beauty brand featuring cart management, user authentication, WhatsApp ordering, and Nigeria-wide delivery logic.',
     problem:
-      'The brand was taking orders manually via Instagram DMs — no cart, no inventory tracking, no order confirmation system. They needed a proper digital storefront that matched their brand identity and worked for Nigerian customers.',
+      'The brand was taking orders manually via Instagram DMs, no cart, no inventory tracking, no order confirmation system. They needed a proper digital storefront that matched their brand identity and worked for Nigerian customers.',
     solution:
       'Built a full shopping experience with a Node.js backend, user authentication, persistent cart management, and a WhatsApp checkout integration that fits local market buying behaviour. Newsletter and delivery zone logic added for operational efficiency.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MySQL'],
@@ -72,7 +72,7 @@ export const FEATURED_PROJECTS = [
     title: 'FlowMetrics SaaS',
     subtitle: 'Multi-Tenant Business Analytics Platform',
     description:
-      'A SaaS analytics platform concept demonstrating multi-tenant architecture, JWT authentication, role-based access control, and a real-time dashboard — the kind of system most Upwork clients actually need built.',
+      'A SaaS analytics platform concept demonstrating multi-tenant architecture, JWT authentication, role-based access control, and a real-time dashboard the kind of system most Upwork clients actually need built.',
     problem:
       'Small SaaS teams need analytics dashboards but lack the backend infrastructure to support multi-tenant data isolation, tiered subscription access, and a secure API. Most freelancers build the UI but miss the architecture.',
     solution:
@@ -81,7 +81,7 @@ export const FEATURED_PROJECTS = [
     highlights: [
       'Multi-tenant data isolation at the query level',
       'JWT authentication with refresh token rotation',
-      'Three-tier RBAC — owner, admin, member',
+      'Three-tier RBAC: owner, admin, member',
       'Subscription gating via payment webhook events',
       'Real-time dashboard with chart components',
       'API rate limiting and input validation middleware',
@@ -105,7 +105,7 @@ export const MINI_PROJECTS = [
     id: 'stock-dashboard',
     title: 'Stock Analysis Dashboard',
     description:
-      'Personal site featuring a full stock analysis tool — ticker search, market cap, revenue, EPS, historical price charts, and news sentiment analysis with word cloud.',
+      'Personal site featuring a full stock analysis tool; ticker search, market cap, revenue, EPS, historical price charts, and news sentiment analysis with word cloud.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Financial APIs'],
     github: '#',
   },
@@ -113,7 +113,7 @@ export const MINI_PROJECTS = [
     id: 'species-catalogue',
     title: 'Species Catalogue',
     description:
-      'Interactive species search app — search any organism by common or scientific name (e.g. Panthera leo) and get structured biological data from live APIs.',
+      'Interactive species search app. Search any organism by common or scientific name (e.g. Panthera leo) and get structured biological data from live APIs.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'REST API'],
     github: '#',
   },

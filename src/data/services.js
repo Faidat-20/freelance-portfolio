@@ -9,13 +9,13 @@ export const SERVICES = [
     icon: 'ShoppingCart',
     title: 'E-Commerce Platforms',
     description:
-      'Full shopping experiences — cart, checkout, payment gateway integration, order management, and admin panels.',
+      'Full shopping experiences: cart, checkout, payment gateway integration, order management, and admin panels.',
   },
   {
     icon: 'Code2',
     title: 'Custom Web Applications',
     description:
-      'Bespoke web apps tailored to your business logic — from internal tools to customer-facing products.',
+      'Bespoke web apps tailored to your business logic from internal tools to customer-facing products.',
   },
   {
     icon: 'BarChart2',
@@ -33,25 +33,25 @@ export const SERVICES = [
     icon: 'Plug',
     title: 'Third-Party API Integration',
     description:
-      'Flutterwave, Paystack, Stripe, Twilio, WhatsApp — integrated reliably with proper webhook handling.',
+      'Flutterwave, Paystack, Stripe, Twilio, WhatsApp integrated reliably with proper webhook handling.',
   },
   {
     icon: 'Lock',
     title: 'Authentication Systems',
     description:
-      'JWT, session auth, OAuth, and role-based access control — implemented correctly, not bolted on as an afterthought.',
+      'JWT, session auth, OAuth, and role-based access control implemented correctly, not bolted on as an afterthought.',
   },
   {
     icon: 'Database',
     title: 'Database Architecture',
     description:
-      'Relational and NoSQL schema design — normalisation, indexing, query optimisation, and migration strategies.',
+      'Relational and NoSQL schema design. Normalisation, indexing, query optimisation, and migration strategies.',
   },
   {
     icon: 'Smartphone',
     title: 'Progressive Web Apps',
     description:
-      'PWAs that work offline, install on any device, and feel native — without the cost of a separate mobile build.',
+      'PWAs that work offline, install on any device, and feel native without the cost of a separate mobile build.',
   },
   {
     icon: 'Globe',
@@ -63,20 +63,20 @@ export const SERVICES = [
     icon: 'Zap',
     title: 'Performance Optimisation',
     description:
-      'Lighthouse audits, lazy loading, caching strategies, bundle optimisation — measurable speed improvements.',
+      'Lighthouse audits, lazy loading, caching strategies, bundle optimisation measurable speed improvements.',
   },
   {
     icon: 'Bug',
     title: 'Bug Fixing & Maintenance',
     description:
-      'Reliable ongoing support — debug existing codebases, add features, and keep production systems healthy.',
+      'Reliable ongoing support, debug existing codebases, add features, and keep production systems healthy.',
   },
 ]
 
 export const FLAGSHIP_SERVICE = {
   title: 'End-to-end SaaS development',
   description:
-    "Most developers hand you a frontend and leave you to figure out the backend. I don't work that way. I own the entire stack — database schema, REST API, authentication, business logic, and the interface your users actually see. One developer. Full ownership. No coordination gaps.",
+    "Most developers hand you a frontend and leave you to figure out the backend. I don't work that way. I own the entire stack, database schema, REST API, authentication, business logic, and the interface your users actually see. One developer. Full ownership. No coordination gaps.",
   points: [
     'Multi-tenant architecture from day one',
     'Subscription billing with Stripe or Flutterwave',

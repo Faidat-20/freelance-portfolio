@@ -122,13 +122,13 @@ export default function Hero() {
           className="text-slate-400 mb-10 max-w-xl"
           style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', lineHeight: 1.75 }}
         >
-          I design, architect, and ship scalable web applications end-to-end —
-          from database schema to polished UI — so your product reaches users
+          I design, architect, and ship scalable web applications end-to-end. 
+          From database schema to polished UI, so your product reaches users
           faster and grows without breaking.
         </p>
 
         {/* CTA buttons */}
-        <div ref={btnsRef} className="flex flex-wrap gap-4 mb-16">
+        <div ref={btnsRef} className="flex flex-row flex-nowrap items-center gap-4 mb-16">
           <button
             onClick={() => scrollToSection('#work')}
             className="btn-primary"

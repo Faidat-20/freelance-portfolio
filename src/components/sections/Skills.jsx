@@ -81,7 +81,7 @@ export default function Skills() {
             className="text-slate-500"
             style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
           >
-            Honest proficiency levels — no "100% React" bars here. I know what
+            Honest proficiency levels, no "100% React" bars here. I know what
             I'm strong in and what I'm still growing in.
           </p>
         </div>

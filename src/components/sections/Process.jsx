@@ -48,7 +48,7 @@ export default function Process() {
             className="text-slate-400"
             style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
           >
-            Every project follows a structured workflow — so you always know
+            Every project follows a structured workflow so you always know
             what's happening, what's next, and what to expect.
           </p>
         </div>

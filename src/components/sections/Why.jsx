@@ -9,12 +9,12 @@ const REASONS = [
   {
     icon: Code2,
     title: 'Clean Architecture',
-    description: 'Every project is structured for maintainability — modular components, clear separation of concerns, and code the next developer can actually read.',
+    description: 'Every project is structured for maintainability, modular components, clear separation of concerns, and code the next developer can actually read.',
   },
   {
     icon: TrendingUp,
     title: 'Scalable by Default',
-    description: 'I build with growth in mind. The database schema, API design, and frontend architecture are planned to scale — not refactored later.',
+    description: 'I build with growth in mind. The database schema, API design, and frontend architecture are planned to scale not refactored later.',
   },
   {
     icon: MessageSquare,
@@ -24,22 +24,22 @@ const REASONS = [
   {
     icon: Zap,
     title: 'Performance Focused',
-    description: 'Fast load times, optimised queries, and efficient rendering are not afterthoughts — they are part of how I build from day one.',
+    description: 'Fast load times, optimised queries, and efficient rendering are not afterthoughts, they are part of how I build from day one.',
   },
   {
     icon: Shield,
     title: 'Security Aware',
-    description: 'Input validation, proper auth implementation, SQL injection prevention, and secure API design are built in — not bolted on.',
+    description: 'Input validation, proper auth implementation, SQL injection prevention, and secure API design are built in not bolted on.',
   },
   {
     icon: Lightbulb,
     title: 'Business Understanding',
-    description: 'I think about your users and your business goals — not just the feature spec. Good engineering serves the product, not the other way around.',
+    description: 'I think about your users and your business goals not just the feature spec. Good engineering serves the product, not the other way around.',
   },
   {
     icon: Clock,
     title: 'Reliable Delivery',
-    description: 'I deliver what I commit to. If scope or timeline changes, I communicate it immediately — not on the day of the deadline.',
+    description: 'I deliver what I commit to. If scope or timeline changes, I communicate it immediately not on the day of the deadline.',
   },
   {
     icon: Search,
@@ -94,7 +94,7 @@ export default function Why() {
             className="text-slate-500"
             style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
           >
-            Beyond the tech stack — the working principles that make
+            Beyond the tech stack, the working principles that make
             every project run smoothly.
           </p>
         </div>

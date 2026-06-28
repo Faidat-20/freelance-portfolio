@@ -4,7 +4,7 @@ import { gsap, ScrollTrigger } from '@utils/gsap'
 const VALUES = [
   {
     title: 'Clean Architecture',
-    description: 'I write code that the next developer — or future me — can read, understand, and extend without frustration.',
+    description: 'I write code that the next developer or future me can read, understand, and extend without frustration.',
   },
   {
     title: 'Business Thinking',
@@ -16,7 +16,7 @@ const VALUES = [
   },
   {
     title: 'Reliability',
-    description: 'I deliver what I commit to. If something changes, I communicate it immediately — not on the deadline.',
+    description: 'I deliver what I commit to. If something changes, I communicate it immediately not on the deadline.',
   },
 ]
 
@@ -69,8 +69,8 @@ export default function About() {
               style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
             >
               <p>
-                I'm a full-stack developer with 3–4 years of experience designing and
-                building complete web applications — from the database schema to the
+                I'm a full-stack developer with 2–3 years of experience designing and
+                building complete web applications from the database schema to the
                 interface your users actually interact with.
               </p>
               <p>
@@ -81,7 +81,7 @@ export default function About() {
               </p>
               <p>
                 I care deeply about writing maintainable code, communicating clearly,
-                and delivering software that solves real business problems — not just
+                and delivering software that solves real business problems not just
                 ticking feature boxes.
               </p>
             </div>

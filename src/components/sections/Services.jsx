@@ -63,7 +63,7 @@ export default function Services() {
             className="text-slate-500"
             style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
           >
-            No handoffs. No coordination gaps. I own the full stack — backend
+            No handoffs. No coordination gaps. I own the full stack; backend
             architecture, REST APIs, databases, auth, and the frontend your
             users actually see.
           </p>

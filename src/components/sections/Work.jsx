@@ -193,7 +193,7 @@ export default function Work() {
             className="text-slate-500"
             style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
           >
-            Every project below is presented as an engineering case study —
+            Every project below is presented as an engineering case study,
             the problem, the decisions made, the architecture, and the outcome.
           </p>
         </div>
