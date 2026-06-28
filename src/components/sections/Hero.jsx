@@ -69,7 +69,7 @@ export default function Hero() {
       })
     }, sectionRef)
 
-    return () => ctx.revert()
+    return () => {}
   }, [])
 
   return (
