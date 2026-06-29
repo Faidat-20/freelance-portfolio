@@ -10,15 +10,21 @@ const TAG_STYLES = {
 }
 
 function ProjectCard({ project, index }) {
+  const isFlagship = index === 0
   const [expanded, setExpanded] = useState(false)
   const cardRef                 = useRef(null)
 
   return (
-    <article ref={cardRef} className="card overflow-hidden">
+    <article ref={cardRef} className={isFlagship ? "card overflow-hidden border-indigo-200 shadow-lg shadow-indigo-50 relative" : "card overflow-hidden relative"}>
 
       {/* Card header */}
       <div className="p-8 md:p-10">
         <div className="flex items-start justify-between gap-4 mb-6">
+          {isFlagship && (
+            <span className="absolute top-4 right-4 text-xs font-semibold bg-indigo-600 text-white px-3 py-1 rounded-full">
+              Featured Project
+            </span>
+          )}
           <span className={`text-xs font-medium px-3 py-1 rounded-full ${TAG_STYLES[project.tagType]}`}>
             {project.tag}
           </span>
@@ -50,7 +56,7 @@ function ProjectCard({ project, index }) {
 
         <h3
           className="font-display font-extrabold text-[#0F172A] mb-1"
-          style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', letterSpacing: '-0.03em' }}
+          style={{ fontSize: isFlagship ? 'clamp(1.75rem, 3vw, 2.25rem)' : 'clamp(1.5rem, 3vw, 2rem)', letterSpacing: '-0.03em' }}
         >
           {project.title}
         </h3>
