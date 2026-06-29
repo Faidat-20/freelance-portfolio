@@ -62,7 +62,7 @@ export const FEATURED_PROJECTS = [
     ],
     accentColor: '#F472B6',
     status: 'shipped',
-    github: '#',
+    github: 'https://github.com/Faidat-20/JC-Website',
     live: null,
   },
   {
@@ -107,7 +107,7 @@ export const MINI_PROJECTS = [
     description:
       'Personal site featuring a full stock analysis tool; ticker search, market cap, revenue, EPS, historical price charts, and news sentiment analysis with word cloud.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Financial APIs'],
-    github: '#',
+    github: 'https://github.com/Barakat-20',
   },
   {
     id: 'species-catalogue',
@@ -115,6 +115,6 @@ export const MINI_PROJECTS = [
     description:
       'Interactive species search app. Search any organism by common or scientific name (e.g. Panthera leo) and get structured biological data from live APIs.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'REST API'],
-    github: '#',
+    github: 'https://github.com/Barakat-20',
   },
 ]
