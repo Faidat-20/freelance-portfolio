@@ -88,7 +88,7 @@
   }
 
   .section-padding {
-    padding-block: 5rem;
+    padding-block: 6rem;
   }
 
   .text-display {
@@ -114,8 +114,8 @@
 
   .card:hover {
     border-color: #C7D2FE;
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(99,102,241,0.1);
+    transform: translateY(-3px);
   }
 
   .card-dark {
@@ -144,8 +144,8 @@
 
   .btn-primary:hover {
     background: var(--color-accent-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(99,102,241,0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(99,102,241,0.45);
   }
 
   .btn-ghost {
