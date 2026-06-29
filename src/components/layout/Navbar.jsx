@@ -7,7 +7,7 @@ import { gsap } from '@utils/gsap'
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [active, setActive] = useState('')
+  const [active, setActive] = useState('hero')
   const progressRef = useRef(null)
   const navRef = useRef(null)
 
@@ -85,7 +85,7 @@ export default function Navbar() {
               href={UPWORK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm hidden sm:inline-flex"
+              className="btn-primary text-sm hidden md:inline-flex"
             >
               Hire on Upwork
             </a>
@@ -109,15 +109,6 @@ export default function Navbar() {
                 {label}
               </button>
             ))}
-            
-            <a
-              href={UPWORK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary w-fit mt-2"
-            >
-              Hire on Upwork
-            </a>
           </div>
         )}
       </header>
