@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container-custom">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <span className="font-display font-extrabold text-xl text-white tracking-tight">
-            dev<span className="text-indigo-400">.</span>
+            Faidat E<span className="text-indigo-400">.</span>
           </span>
           <nav aria-label="Footer navigation">
             <ul className="flex flex-wrap justify-center gap-6" role="list">

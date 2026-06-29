@@ -62,7 +62,7 @@ export default function Navbar() {
             className="font-display font-extrabold text-lg text-white tracking-tight focus-visible:outline-none"
             aria-label="Back to top"
           >
-            dev<span className="text-indigo-400">.</span>
+            Faidat E<span className="text-indigo-400">.</span>
           </button>
           <ul className="hidden md:flex items-center gap-8" role="list">
             {NAV_LINKS.map(({ label, href }) => {

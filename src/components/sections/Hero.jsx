@@ -27,6 +27,7 @@ export default function Hero() {
   const counterRefs = useRef([])
 
   useEffect(() => {
+    gsap.set([badgeRef.current, headingRef.current, subRef.current, btnsRef.current, statsRef.current], { opacity: 1 })
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 })
 
@@ -111,9 +112,11 @@ export default function Hero() {
           className="font-display font-extrabold text-white mb-6 overflow-hidden"
           style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}
         >
-          <span className="block">Full-Stack Engineer</span>
-          <span className="block">who builds <span className="text-indigo-400">complete</span></span>
-          <span className="block">products.</span>
+
+          <span className="block">Hi, I'm Faidat</span>
+          <span className="block">Full-Stack Developer</span>
+          <span className="block">Building scalable <span className="text-indigo-400">web applications</span></span>
+          <span className="block">that help businesses grow.</span>
         </h1>
 
         {/* Subheading */}
