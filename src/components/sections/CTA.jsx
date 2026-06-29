@@ -11,6 +11,7 @@ export default function CTA() {
   const noteRef    = useRef(null)
 
   useEffect(() => {
+    gsap.set([headingRef.current, subRef.current, btnRef.current, noteRef.current], { opacity: 1, y: 0 })
     const ctx = gsap.context(() => {
       gsap.from(headingRef.current, {
         opacity: 0, y: 40, duration: 0.9, ease: 'power2.out',

@@ -27,25 +27,25 @@ export default function About() {
   const cardsRef   = useRef(null)
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(tagRef.current, {
-        opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: tagRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(headingRef.current, {
-        opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: headingRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(bioRef.current, {
-        opacity: 0, y: 24, duration: 0.7, ease: 'power2.out',
-        scrollTrigger: { trigger: bioRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(cardsRef.current.children, {
-        opacity: 0, y: 30, duration: 0.6, ease: 'power2.out', stagger: 0.12,
-        scrollTrigger: { trigger: cardsRef.current, start: 'top 85%', once: true },
-      })
+    gsap.set([tagRef.current, headingRef.current, bioRef.current], { opacity: 1, y: 0 })
+    gsap.set(cardsRef.current.children, { opacity: 1, y: 0 })
+
+    gsap.from(tagRef.current, {
+      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: tagRef.current, start: 'top 85%', once: true },
     })
-    return () => ctx.revert()
+    gsap.from(headingRef.current, {
+      opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
+      scrollTrigger: { trigger: headingRef.current, start: 'top 85%', once: true },
+    })
+    gsap.from(bioRef.current, {
+      opacity: 0, y: 24, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: bioRef.current, start: 'top 85%', once: true },
+    })
+    gsap.from(cardsRef.current.children, {
+      opacity: 0, y: 30, duration: 0.6, ease: 'power2.out', stagger: 0.12,
+      scrollTrigger: { trigger: cardsRef.current, start: 'top 85%', once: true },
+    })
   }, [])
 
   return (

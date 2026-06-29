@@ -178,7 +178,7 @@ export default function Hero() {
           {[...TECH_STACK, ...TECH_STACK].map((tech, i) => (
             <span
               key={i}
-              className="text-sm font-medium text-slate-600 tracking-wide uppercase"
+              className="text-sm font-medium text-slate-400 tracking-wide uppercase"
             >
               {tech}
             </span>

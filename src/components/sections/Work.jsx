@@ -149,6 +149,7 @@ export default function Work() {
   const miniRef    = useRef(null)
 
   useEffect(() => {
+    gsap.set([tagRef.current, headingRef.current, subRef.current, listRef.current, miniRef.current], { opacity: 1, y: 0 })
     const ctx = gsap.context(() => {
       gsap.from(tagRef.current, {
         opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',

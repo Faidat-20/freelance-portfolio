@@ -42,6 +42,7 @@ export default function Skills() {
   const gridRef    = useRef(null)
 
   useEffect(() => {
+    gsap.set([tagRef.current, headingRef.current, subRef.current, gridRef.current], { opacity: 1, y: 0 })
     const ctx = gsap.context(() => {
       gsap.from(tagRef.current, {
         opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
