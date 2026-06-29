@@ -3,8 +3,8 @@ import { gsap } from '@utils/gsap'
 
 const TECH_STACK = [
   'PHP',
-  'Laravel',
   'JavaScript',
+  'Typescript',
   'React',
   'Node.js',
   'MySQL',
@@ -12,6 +12,7 @@ const TECH_STACK = [
   'Tailwind CSS',
   'GSAP',
   'REST API',
+  'API Integration',
   'Git',
   'GitHub',
   'Postman',
