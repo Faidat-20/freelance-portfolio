@@ -224,4 +224,9 @@
     color: #818CF8;
     letter-spacing: 0.02em;
   }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 }

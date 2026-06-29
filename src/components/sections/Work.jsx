@@ -86,7 +86,10 @@ function ProjectCard({ project, index }) {
 
       {/* Expanded case study */}
       {expanded && (
-        <div className="px-8 md:px-10 pb-10 border-t border-[#E2E8F0] bg-[#FAFAFA]">
+        <div
+          className="px-8 md:px-10 pb-10 border-t border-[#E2E8F0] bg-[#FAFAFA]"
+          style={{ animation: 'fadeDown 0.3s ease forwards' }}
+        >
 
           <div className="grid md:grid-cols-2 gap-10 pt-8">
 

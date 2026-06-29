@@ -72,11 +72,11 @@ export default function Process() {
               >
                 {step.title}
               </h3>
-              <p className="text-sm text-slate-400 mb-4" style={{ lineHeight: 1.7 }}>
+              <p className="text-sm text-slate-300 mb-4" style={{ lineHeight: 1.7 }}>
                 {step.description}
               </p>
               <div className="pt-3 border-t border-white/[0.06]">
-                <span className="text-xs text-indigo-400 font-medium">
+                <span className="text-xs text-indigo-300 font-medium">
                   Deliverable: {step.deliverable}
                 </span>
               </div>
