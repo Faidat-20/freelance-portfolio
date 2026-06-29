@@ -4,19 +4,23 @@ import { gsap, ScrollTrigger } from '@utils/gsap'
 const VALUES = [
   {
     title: 'Clean Architecture',
-    description: 'I write code that the next developer or future me can read, understand, and extend without frustration.',
+    description:
+      'Maintainable, scalable code that is easy to understand and extend.',
   },
   {
-    title: 'Business Thinking',
-    description: 'I build features that solve real problems, not just features that look good in a spec. Every decision is weighed against business value.',
+    title: 'Business Focus',
+    description:
+      'Every feature is built to solve a real business problem and deliver measurable value.',
   },
   {
     title: 'Clear Communication',
-    description: 'I give regular updates, ask the right questions early, and flag issues before they become problems.',
+    description:
+      'Regular updates, transparent timelines, and proactive communication throughout the project.',
   },
   {
-    title: 'Reliability',
-    description: 'I deliver what I commit to. If something changes, I communicate it immediately not on the deadline.',
+    title: 'Reliable Delivery',
+    description:
+      'I deliver what I commit to and communicate early whenever priorities change.',
   },
 ]
 
@@ -53,65 +57,105 @@ export default function About() {
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-          {/* Left — bio */}
+          {/* Left — About */}
           <div>
-            <span ref={tagRef} className="section-label">About</span>
+            <span ref={tagRef} className="section-label">
+              About
+            </span>
+
             <h2
               ref={headingRef}
               className="font-display font-extrabold text-[#0F172A] mb-6"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.03em', lineHeight: 1.1 }}
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                letterSpacing: '-0.03em',
+                lineHeight: 1.1,
+              }}
             >
-              I build software that works — not just software that ships.
+              Building software that solves real business problems.
             </h2>
+
             <div
               ref={bioRef}
-              className="space-y-4 text-slate-600"
-              style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
+              className="space-y-5 text-slate-600"
+              style={{
+                fontSize: '1.0625rem',
+                lineHeight: 1.8,
+              }}
             >
               <p>
-                I'm a full-stack developer with 2–3 years of experience designing and
-                building complete web applications from the database schema to the
-                interface your users actually interact with.
+                I'm a Full-Stack Developer who builds scalable web applications from
+                backend architecture and APIs to responsive, intuitive user interfaces.
+                My focus is creating software that's reliable, maintainable, and built
+                to support real business growth.
               </p>
+
               <p>
-                My background spans e-commerce platforms, SaaS dashboards, REST APIs,
-                and admin systems. I've worked with Nigerian businesses integrating
-                local payment gateways like Flutterwave and Paystack, and I understand
-                the unique challenges of building for emerging markets.
-              </p>
-              <p>
-                I care deeply about writing maintainable code, communicating clearly,
-                and delivering software that solves real business problems not just
-                ticking feature boxes.
+                I've developed e-commerce platforms, SaaS dashboards, admin systems, and
+                custom web applications while integrating payment gateways such as
+                Flutterwave and Paystack. I value clean code, clear communication, and
+                delivering solutions that continue to perform long after launch.
               </p>
             </div>
 
-            {/* Currently learning */}
-            <div className="mt-8 p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl">
-              <p className="text-xs font-semibold text-indigo-600 uppercase tracking-widest mb-2">
-                Currently levelling up
+            {/* Mini Workflow */}
+            <div className="mt-10 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600 mb-5">
+                How I work
               </p>
-              <p className="text-sm text-slate-600">
-                Docker · AWS fundamentals
-              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3 text-sm text-slate-700">
+                <div>✓ Discovery & Planning</div>
+                <div>✓ UI/UX Design</div>
+                <div>✓ Full-Stack Development</div>
+                <div>✓ Testing & Deployment</div>
+                <div>✓ Ongoing Support</div>
+              </div>
             </div>
           </div>
 
-          {/* Right — values */}
-          <div ref={cardsRef} className="grid sm:grid-cols-2 gap-4">
-            {VALUES.map((value) => (
-              <div key={value.title} className="card p-6">
-                <h3
-                  className="font-display font-bold text-[#0F172A] mb-3"
-                  style={{ fontSize: '1rem', letterSpacing: '-0.02em' }}
-                >
-                  {value.title}
-                </h3>
-                <p className="text-sm text-slate-500" style={{ lineHeight: 1.7 }}>
-                  {value.description}
-                </p>
-              </div>
-            ))}
+          {/* Right — What you can expect */}
+          <div>
+
+            <div className="mb-8">
+              <h3
+                className="font-display font-bold text-[#0F172A] mb-2"
+                style={{
+                  fontSize: '1.5rem',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                What you can expect
+              </h3>
+
+              <p className="text-slate-500">
+                Here's what it's like working with me on every project.
+              </p>
+            </div>
+
+            <div ref={cardsRef} className="grid sm:grid-cols-2 gap-4">
+              {VALUES.map((value) => (
+                <div key={value.title} className="card p-6">
+                  <h3
+                    className="font-display font-bold text-[#0F172A] mb-3"
+                    style={{
+                      fontSize: '1rem',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {value.title}
+                  </h3>
+
+                  <p
+                    className="text-sm text-slate-500"
+                    style={{ lineHeight: 1.7 }}
+                  >
+                    {value.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
           </div>
 
         </div>

@@ -33,12 +33,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    gsap.from(navRef.current, {
-      y: -60, opacity: 0, duration: 0.8, ease: 'power2.out', delay: 0.2,
-    })
-  }, [])
-
   const handleNav = (href) => {
     scrollToSection(href)
     setMenuOpen(false)

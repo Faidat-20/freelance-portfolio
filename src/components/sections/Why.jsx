@@ -8,43 +8,39 @@ import {
 const REASONS = [
   {
     icon: Code2,
-    title: 'Clean Architecture',
-    description: 'Every project is structured for maintainability, modular components, clear separation of concerns, and code the next developer can actually read.',
+    title: 'Clean Code',
+    description:
+      'Maintainable, scalable code built with clear architecture and best practices.',
   },
   {
     icon: TrendingUp,
-    title: 'Scalable by Default',
-    description: 'I build with growth in mind. The database schema, API design, and frontend architecture are planned to scale not refactored later.',
+    title: 'Built to Scale',
+    description:
+      'Applications designed to grow with your business without major rewrites.',
   },
   {
     icon: MessageSquare,
     title: 'Clear Communication',
-    description: 'Regular updates, honest timelines, and no surprises. I flag issues early and keep you informed at every stage of the project.',
-  },
-  {
-    icon: Zap,
-    title: 'Performance Focused',
-    description: 'Fast load times, optimised queries, and efficient rendering are not afterthoughts, they are part of how I build from day one.',
+    description:
+      'Regular updates, realistic timelines, and transparent collaboration.',
   },
   {
     icon: Shield,
-    title: 'Security Aware',
-    description: 'Input validation, proper auth implementation, SQL injection prevention, and secure API design are built in not bolted on.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Business Understanding',
-    description: 'I think about your users and your business goals not just the feature spec. Good engineering serves the product, not the other way around.',
+    title: 'Secure by Design',
+    description:
+      'Authentication, validation, and security best practices built into every project.',
   },
   {
     icon: Clock,
     title: 'Reliable Delivery',
-    description: 'I deliver what I commit to. If scope or timeline changes, I communicate it immediately not on the day of the deadline.',
+    description:
+      'I meet commitments and communicate early whenever priorities change.',
   },
   {
     icon: Search,
     title: 'Attention to Detail',
-    description: 'Pixel-perfect UI, consistent spacing, edge case handling, and thorough testing. The small things are what separate good software from great software.',
+    description:
+      'Thoughtful UI, polished interactions, and careful testing before delivery.',
   },
 ]
 

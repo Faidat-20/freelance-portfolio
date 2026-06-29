@@ -1,19 +1,13 @@
 import { useEffect, useRef } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
-import { UPWORK_URL } from '@constants'
-import { gsap, ScrollTrigger } from '@utils/gsap'
+
+import { gsap } from '@utils/gsap'
 import { scrollToSection } from '@utils/helpers'
 
-const TECH_STACK = [
-  'React', 'Node.js', 'PHP', 'MySQL',
-  'MongoDB', 'REST APIs', 'JWT Auth', 'Tailwind CSS',
-  'Flutterwave', 'GSAP', 'Git', 'Vercel', 'Express.js',
-]
-
 const STATS = [
-  { value: 15, suffix: '+', label: 'Projects shipped' },
-  { value: 4,  suffix: ' yrs', label: 'Building full-stack' },
-  { value: 3,  suffix: '+', label: 'Happy clients' },
+  { value: 15, suffix: '+', label: 'Projects Built' },
+  { value: 3,  suffix: ' yrs', label: 'Experience' },
+  { value: 10,  suffix: '+', label: ' clients' },
 ]
 
 export default function Hero() {
@@ -61,16 +55,9 @@ export default function Hero() {
           },
         })
       })
-
-      gsap.to(marqueeRef.current, {
-        x: '-50%',
-        duration: 25,
-        ease: 'none',
-        repeat: -1,
-      })
     }, sectionRef)
 
-    return () => {}
+    return () => ctx.revert()
   }, [])
 
   return (
@@ -97,103 +84,86 @@ export default function Hero() {
       />
 
       <div className="container-custom relative z-10 pt-28 pb-16">
-
-        {/* Availability badge */}
-        <div ref={badgeRef} className="mb-8">
-          <span className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.1] text-slate-300 text-xs font-medium px-4 py-2 rounded-full">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Available for new projects
-          </span>
-        </div>
-
-        {/* Heading */}
-        <h1
-          ref={headingRef}
-          className="font-display font-extrabold text-white mb-6 overflow-hidden"
-          style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}
-        >
-
-          <span className="block">Hi, I'm Faidat</span>
-          <span className="block">Full-Stack Developer</span>
-          <span className="block">Building scalable <span className="text-indigo-400">web applications</span></span>
-          <span className="block">that help businesses grow.</span>
-        </h1>
-
-        {/* Subheading */}
-        <p
-          ref={subRef}
-          className="text-slate-400 mb-10 max-w-xl"
-          style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', lineHeight: 1.75 }}
-        >
-          I design, architect, and ship scalable web applications end-to-end. 
-          From database schema to polished UI, so your product reaches users
-          faster and grows without breaking.
-        </p>
-
-        {/* CTA buttons */}
-        <div ref={btnsRef} className="flex flex-row flex-nowrap items-center gap-4 mb-16">
-          <button
-            onClick={() => scrollToSection('#work')}
-            className="btn-primary"
-          >
-            View case studies
-            <ArrowRight size={16} />
-          </button>
-          <button
-            onClick={() => scrollToSection('#process')}
-            className="btn-ghost"
-          >
-            See my process
-          </button>
-        </div>
-
-        {/* Stats */}
-        <div
-          ref={statsRef}
-          className="flex flex-wrap gap-8 pb-16 border-b border-white/[0.06]"
-        >
-          {STATS.map((stat, i) => (
-            <div key={stat.label}>
-              <div
-                ref={(el) => (counterRefs.current[i] = el)}
-                className="font-display font-extrabold text-white mb-1"
-                style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', letterSpacing: '-0.03em' }}
-              >
-                0{stat.suffix}
-              </div>
-              <div className="text-sm text-slate-500">{stat.label}</div>
+         <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            {/* Availability badge */}
+            <div ref={badgeRef} className="mb-8">
+              <span className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.1] text-slate-300 text-xs font-medium px-4 py-2 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Available for Freelance Work
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Tech marquee */}
-      <div className="relative z-10 overflow-hidden py-6 border-t border-white/[0.04]">
-        <div
-          ref={marqueeRef}
-          className="flex gap-12 whitespace-nowrap"
-          style={{ width: 'max-content' }}
-          aria-hidden="true"
-        >
-          {[...TECH_STACK, ...TECH_STACK].map((tech, i) => (
-            <span
-              key={i}
-              className="text-sm font-medium text-slate-400 tracking-wide uppercase"
+            {/* Heading */}
+            <h1
+              ref={headingRef}
+              className="font-display font-extrabold text-white mb-6"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1.12 }}
             >
-              {tech}
-            </span>
-          ))}
+              <span className="block text-lg md:text-xl font-normal text-slate-400 mb-2" style={{ letterSpacing: '-0.01em' }}>
+                Hi, I'm Faidat
+              </span>
+              <span className="block">Full-Stack Developer</span>
+              <span className="block">
+                building <span className="text-indigo-400">complete</span> web
+              </span>
+              <span className="block">applications.</span>
+            </h1>
+
+            {/* Subheading */}
+            <p
+              ref={subRef}
+              className="text-slate-400 mb-10 max-w-xl"
+              style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)', lineHeight: 1.75 }}
+            >
+              I build scalable full-stack web applications from database architecture to polished user interfaces helping businesses launch faster with software built to grow.
+            </p>
+
+            {/* CTA buttons */}
+            <div ref={btnsRef} className="flex flex-row flex-nowrap items-center gap-4 mb-16">
+              <button
+                onClick={() => scrollToSection('#work')}
+                className="btn-ghost"
+              >
+                View My Work
+              </button>
+              <button
+                onClick={() => scrollToSection('#services')}
+                className="btn-ghost"
+              >
+                My Services
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div
+              ref={statsRef}
+              className="flex flex-wrap gap-16"
+            >
+              {STATS.map((stat, i) => (
+                <div key={stat.label}>
+                  <div
+                    ref={(el) => (counterRefs.current[i] = el)}
+                    className="font-display font-extrabold text-white mb-1"
+                    style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', letterSpacing: '-0.03em' }}
+                  >
+                    0{stat.suffix}
+                  </div>
+                  <div className="text-sm text-slate-500">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden lg:flex justify-center lg:self-start">
+            <img
+              src="/images/faidat.png"
+              alt="Faidat Egberinde"
+              className="w-[420px] rounded-3xl shadow-2xl object-cover"
+            />
+          </div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <button
-        onClick={() => scrollToSection('#about')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-600 hover:text-slate-400 transition-colors animate-bounce"
-        aria-label="Scroll down"
-      >
-        <ChevronDown size={24} />
-      </button>
     </section>
   )
 }

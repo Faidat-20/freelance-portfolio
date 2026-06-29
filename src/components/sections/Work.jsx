@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { gsap } from '@utils/gsap'
 import { FEATURED_PROJECTS, MINI_PROJECTS } from '@data/projects'
-import { ExternalLink, GitBranch, ChevronDown, ChevronUp } from 'lucide-react'
+import { ExternalLink, GitBranch} from 'lucide-react'
 
 const TAG_STYLES = {
   active:  'bg-emerald-50 text-emerald-700 border border-emerald-200',
@@ -10,15 +10,14 @@ const TAG_STYLES = {
 }
 
 function ProjectCard({ project, index }) {
-  const isFlagship = index === 0
-  const [expanded, setExpanded] = useState(false)
   const cardRef                 = useRef(null)
+  const isFlagship = index === 0
 
   return (
     <article ref={cardRef} className={isFlagship ? "card overflow-hidden border-indigo-200 shadow-lg shadow-indigo-50 relative" : "card overflow-hidden relative"}>
 
       {/* Card header */}
-      <div className="p-8 md:p-10">
+      <div className="p-8 md:p-8">
         <div className="flex items-start justify-between gap-4 mb-6">
           {isFlagship && (
             <span className="absolute top-4 right-4 text-xs font-semibold bg-indigo-600 text-white px-3 py-1 rounded-full">
@@ -30,8 +29,8 @@ function ProjectCard({ project, index }) {
           </span>
           <div className="flex items-center gap-3">
             {project.github && (
-              
               <a
+                href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-slate-700 transition-colors"
@@ -40,9 +39,10 @@ function ProjectCard({ project, index }) {
                 <GitBranch size={18} />
               </a>
             )}
+
             {project.live && (
-              
               <a
+                href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-slate-700 transition-colors"
@@ -75,77 +75,6 @@ function ProjectCard({ project, index }) {
         </div>
       </div>
 
-      {/* Expand button */}
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between px-8 md:px-10 py-4 border-t border-[#E2E8F0] text-sm font-medium text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
-      >
-        <span>{expanded ? 'Hide case study details' : 'View full case study'}</span>
-        {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-      </button>
-
-      {/* Expanded case study */}
-      {expanded && (
-        <div
-          className="px-8 md:px-10 pb-10 border-t border-[#E2E8F0] bg-[#FAFAFA]"
-          style={{ animation: 'fadeDown 0.3s ease forwards' }}
-        >
-
-          <div className="grid md:grid-cols-2 gap-10 pt-8">
-
-            {/* Problem & Solution */}
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-display font-bold text-[#0F172A] mb-3 text-sm uppercase tracking-widest text-indigo-600">
-                  The Problem
-                </h4>
-                <p className="text-slate-600 text-sm" style={{ lineHeight: 1.75 }}>
-                  {project.problem}
-                </p>
-              </div>
-              <div>
-                <h4 className="font-display font-bold text-[#0F172A] mb-3 text-sm uppercase tracking-widest text-indigo-600">
-                  My Solution
-                </h4>
-                <p className="text-slate-600 text-sm" style={{ lineHeight: 1.75 }}>
-                  {project.solution}
-                </p>
-              </div>
-            </div>
-
-            {/* Highlights & Architecture */}
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-display font-bold text-[#0F172A] mb-3 text-sm uppercase tracking-widest text-indigo-600">
-                  Key Features
-                </h4>
-                <ul className="space-y-2">
-                  {project.highlights.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                      <span className="text-indigo-400 mt-1 flex-shrink-0">→</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-display font-bold text-[#0F172A] mb-3 text-sm uppercase tracking-widest text-indigo-600">
-                  Architecture
-                </h4>
-                <ul className="space-y-2">
-                  {project.architecture.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                      <span className="text-indigo-400 mt-1 flex-shrink-0">→</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      )}
     </article>
   )
 }
@@ -203,15 +132,17 @@ export default function Work() {
             className="text-slate-500"
             style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
           >
-            Every project below is presented as an engineering case study,
-            the problem, the decisions made, the architecture, and the outcome.
+            A selection of projects showcasing full-stack development, scalable architecture, and practical business solutions.
           </p>
         </div>
 
-        {/* Featured projects */}
         <div ref={listRef} className="space-y-6 mb-16">
           {FEATURED_PROJECTS.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+            />
           ))}
         </div>
 
@@ -223,9 +154,9 @@ export default function Work() {
           >
             Other projects
           </h3>
-          <div ref={miniRef} className="grid sm:grid-cols-2 gap-4">
+          <div ref={miniRef} className="grid grid-cols-2 gap-4">
             {MINI_PROJECTS.map((project) => (
-              <div key={project.id} className="card p-6">
+              <div key={project.id} className="card p-5 md:p-6">
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <h4
                     className="font-display font-bold text-[#0F172A]"
@@ -236,6 +167,7 @@ export default function Work() {
                   {project.github && (
                     
                     <a
+                      href='https://github.com/Barakat-20'
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-slate-400 hover:text-slate-700 transition-colors flex-shrink-0"

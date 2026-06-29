@@ -4,11 +4,14 @@ import { scrollToSection } from '@utils/helpers'
 export default function Footer() {
   return (
     <footer className="bg-[#0F172A] border-t border-white/[0.06]">
-      <div className="container-custom py-10">
+      <div className="container-custom py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-          <span className="font-display font-extrabold text-xl text-white tracking-tight">
+          <button
+            onClick={() => scrollToSection('#hero')}
+            className="font-display font-extrabold text-xl text-white tracking-tight"
+          >
             Faidat E<span className="text-indigo-400">.</span>
-          </span>
+          </button>
           <nav aria-label="Footer navigation">
             <ul className="flex flex-wrap justify-center gap-6" role="list">
               {NAV_LINKS.map(({ label, href }) => (
@@ -26,10 +29,10 @@ export default function Footer() {
         </div>
         <div className="pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-slate-600">
-            © {new Date().getFullYear()} Faidat Egberinde · Full-Stack Developer
+            © {new Date().getFullYear()} Faidat Egberinde. All rights reserved.
           </p>
           <p className="text-xs text-slate-500">
-            Interested in working together? Invite me to your project on Upwork.
+            Available for freelance projects worldwide.
           </p>
         </div>
       </div>

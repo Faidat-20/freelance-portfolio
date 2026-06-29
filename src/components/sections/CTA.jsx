@@ -58,7 +58,7 @@ export default function CTA() {
             maxWidth: '14ch',
           }}
         >
-          Let's build something great together.
+          Ready to build your next product?
         </h2>
 
         <p
@@ -70,13 +70,13 @@ export default function CTA() {
             maxWidth: '42ch',
           }}
         >
-          Have a project in mind? I'm available for freelance work and
-          full-time opportunities. Let's talk about what you're building.
+          Let's discuss your project and turn your idea into a production-ready application.
         </p>
 
         <div ref={btnRef} className="flex flex-wrap items-center justify-center gap-4 mb-10">
           
           <a
+            href='https://www.upwork.com/freelancers/~01e4f8c78897674cc0?viewMode=1'
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary text-base px-8 py-4"
@@ -90,8 +90,7 @@ export default function CTA() {
           ref={noteRef}
           className="text-sm text-slate-600"
         >
-          Interested in working together? Feel free to invite me to your
-          project or send me a message through Upwork.
+          Usually replies within 24 hours.
         </p>
 
       </div>
