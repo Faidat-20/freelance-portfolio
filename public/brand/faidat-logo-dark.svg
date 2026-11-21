@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 100">
+  <title>Faidat</title>
+  <path fill="#AB82FF" d="M0 26 22 2H78L60 26Z"/>
+  <path fill="#AB82FF" d="M0 32H23V76L0 98Z"/>
+  <path fill="#D0B8FF" d="M29 32H60V52H29Z"/>
+  <text x="96" y="73" fill="#F6F3ED"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="66" font-weight="700" letter-spacing="-3">Faidat.</text>
+</svg>

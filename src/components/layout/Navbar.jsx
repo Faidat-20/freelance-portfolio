@@ -1,111 +1,100 @@
-import { useEffect, useRef, useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import { NAV_LINKS, UPWORK_URL } from '@constants'
-import { scrollToSection } from '@utils/helpers'
-import { gsap } from '@utils/gsap'
+import { useEffect, useState } from 'react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
+import { NAV_LINKS } from '@constants'
+import { getPlatformLinks } from '../../utils/platform'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [active, setActive] = useState('hero')
-  const progressRef = useRef(null)
-  const navRef = useRef(null)
+  const platform = getPlatformLinks()
 
   useEffect(() => {
-    const onScroll = () => {
-      const scrollY = window.scrollY
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0
-      if (progressRef.current) {
-        progressRef.current.style.width = progress + '%'
-      }
-      setScrolled(scrollY > 20)
-      const sections = NAV_LINKS.map((l) => l.href.replace('#', ''))
-      for (const id of [...sections].reverse()) {
-        const el = document.getElementById(id)
-        if (el && el.getBoundingClientRect().top <= 120) {
-          setActive(id)
-          break
-        }
-      }
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false)
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+
+    const desktopQuery = window.matchMedia('(min-width: 768px)')
+    const closeOnDesktop = () => {
+      if (desktopQuery.matches) setMenuOpen(false)
+    }
+
+    window.addEventListener('keydown', closeOnEscape)
+    desktopQuery.addEventListener('change', closeOnDesktop)
+
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape)
+      desktopQuery.removeEventListener('change', closeOnDesktop)
+    }
   }, [])
 
-  const handleNav = (href) => {
-    scrollToSection(href)
-    setMenuOpen(false)
-  }
+  const externalProps = platform.external
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {}
 
   return (
-    <>
+    <header className="portfolio-nav">
+      <nav className="portfolio-shell portfolio-nav-inner" aria-label="Main navigation">
+        <a
+          href="#hero"
+          className="portfolio-brand"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Faidat — home"
+        >
+          <img
+            src="/brand/faidat-symbol.svg"
+            alt=""
+            className="portfolio-logo"
+          />
+          <span className="portfolio-brand-name">Faidat.</span>
+        </a>
+
+        <ul className="portfolio-desktop-links">
+          {NAV_LINKS.map(({ label, href }) => (
+            <li key={href}>
+              <a href={href}>{label}</a>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href={platform.href}
+          {...externalProps}
+          className="portfolio-nav-cta"
+        >
+          {platform.navLabel}
+          <ArrowUpRight size={16} aria-hidden="true" />
+        </a>
+
+        <button
+          type="button"
+          className="portfolio-menu-toggle"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-controls="portfolio-mobile-menu"
+          aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+
       <div
-        ref={progressRef}
-        className="fixed top-0 left-0 h-[2px] bg-indigo-500 z-[60]"
-        style={{ width: '0%' }}
-        aria-hidden="true"
-      />
-      <header
-        ref={navRef}
-        className={scrolled ? 'fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0F172A]/95 backdrop-blur-md shadow-lg shadow-black/10' : 'fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#1a1f35] border-b border-white/[0.08]'}
+        id="portfolio-mobile-menu"
+        className="portfolio-mobile-menu"
+        hidden={!menuOpen}
       >
-        <nav className="container-custom flex items-center justify-between h-16 md:h-[72px]">
-          <button
-            onClick={() => handleNav('#hero')}
-            className="font-display font-extrabold text-lg text-white tracking-tight focus-visible:outline-none"
-            aria-label="Back to top"
-          >
-            Faidat E<span className="text-indigo-400">.</span>
-          </button>
-          <ul className="hidden md:flex items-center gap-8" role="list">
-            {NAV_LINKS.map(({ label, href }) => {
-              const id = href.replace('#', '')
-              return (
-                <li key={href}>
-                  <button
-                    onClick={() => handleNav(href)}
-                    className={active === id ? 'text-sm text-white font-medium' : 'text-sm text-slate-400 hover:text-white transition-colors'}
-                  >
-                    {label}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-          <div className="flex items-center gap-3">
-            
-            <a
-              href={UPWORK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-sm hidden md:inline-flex"
-            >
-              Hire on Upwork
-            </a>
-            <button
-              onClick={() => setMenuOpen(menuOpen ? false : true)}
-              className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-              aria-label="Toggle menu"
-            >
-              {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </nav>
-        {menuOpen && (
-          <div className="md:hidden bg-[#0F172A] border-t border-white/[0.06] px-6 py-6 flex flex-col gap-5">
-            {NAV_LINKS.map(({ label, href }) => (
-              <button
-                key={href}
-                onClick={() => handleNav(href)}
-                className="text-left text-base text-slate-300 hover:text-white transition-colors"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
-      </header>
-    </>
+        {NAV_LINKS.map(({ label, href }) => (
+          <a key={href} href={href} onClick={() => setMenuOpen(false)}>
+            {label}
+          </a>
+        ))}
+
+        <a
+          href={platform.href}
+          {...externalProps}
+          onClick={() => setMenuOpen(false)}
+        >
+          {platform.navLabel} ↗
+        </a>
+      </div>
+    </header>
   )
 }
