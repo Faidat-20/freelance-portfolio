@@ -1,195 +1,223 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
+import { ArrowDown, ArrowUpRight } from 'lucide-react'
 import { gsap } from '@utils/gsap'
 import { FEATURED_PROJECTS, MINI_PROJECTS } from '@data/projects'
-import { ExternalLink, GitBranch} from 'lucide-react'
 
-const TAG_STYLES = {
-  active:  'bg-emerald-50 text-emerald-700 border border-emerald-200',
-  shipped: 'bg-indigo-50 text-indigo-700 border border-indigo-200',
-  concept: 'bg-amber-50 text-amber-700 border border-amber-200',
-}
+const SELECTED_PROJECTS = [
+  {
+    id: 'learnloop',
+    title: 'LearnLoop',
+    category: 'Learning platform',
+    role: 'Frontend Developer',
+    image: '/images/projects/learnloop.png',
+    link: 'https://learnloopapp-frontend-web.vercel.app/',
+    linkLabel: 'View live site',
+    description:
+      'Frontend development for a learning platform designed to help students prepare for WAEC, NECO and JAMB.',
+  },
+  {
+    id: 'jikes-cosmetics',
+    title: 'Jikes Cosmetics',
+    category: 'E-commerce',
+    role: 'Full-Stack Developer',
+    image: '/images/projects/jikes-cosmetics.png',
+    link: 'https://github.com/Faidat-20/JC-Website',
+    linkLabel: 'View source code',
+    description:
+      'An online store for a Nigerian beauty brand, bringing product browsing, customer accounts and shopping features into one experience.',
+  },
+  {
+    id: 'jomi-global',
+    title: 'Jomi Global',
+    category: 'Luxury e-commerce',
+    role: 'Full-Stack Developer',
+    status: 'Paused',
+    image: '/images/projects/jomi-global.png',
+    link: 'https://github.com/Faidat-20/JomiGlobal',
+    linkLabel: 'View source code',
+    description:
+      'Development work on a luxury e-commerce platform. The project was paused before completion.',
+  },
+]
 
-function ProjectCard({ project, index }) {
-  const cardRef                 = useRef(null)
-  const isFlagship = index === 0
+const MORE_PROJECTS = [
+  ...MINI_PROJECTS,
+  ...FEATURED_PROJECTS.filter((project) => project.tagType === 'concept'),
+]
 
+function ProjectCard({ project }) {
   return (
-    <article ref={cardRef} className={isFlagship ? "card overflow-hidden border-indigo-200 shadow-lg shadow-indigo-50 relative" : "card overflow-hidden relative"}>
+    <article
+      data-work-reveal
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-[#C9ADA7] bg-[#F2E9E4] p-3 transition-colors hover:border-[#4A4E69]"
+    >
+      <div className="flex aspect-video items-center justify-center overflow-hidden rounded-lg border border-[#9A8C98]/30 bg-[#22223B]">
+        <img
+          src={project.image}
+          alt={`${project.title} website screenshot`}
+          loading="lazy"
+          className="block h-full w-full object-contain"
+        />
+      </div>
 
-      {/* Card header */}
-      <div className="p-8 md:p-8">
-        <div className="flex items-start justify-between gap-4 mb-6">
-          {isFlagship && (
-            <span className="absolute top-4 right-4 text-xs font-semibold bg-indigo-600 text-white px-3 py-1 rounded-full">
-              Featured Project
+      <div className="flex flex-1 flex-col px-1 pb-1 pt-3">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#4A4E69]">
+            {project.category}
+          </p>
+
+          {project.status && (
+            <span className="rounded-full border border-[#9A8C98] px-2.5 py-1 text-[10px] font-medium">
+              {project.status}
             </span>
           )}
-          <span className={`text-xs font-medium px-3 py-1 rounded-full ${TAG_STYLES[project.tagType]}`}>
-            {project.tag}
-          </span>
-          <div className="flex items-center gap-3">
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-700 transition-colors"
-                aria-label="GitHub repository"
-              >
-                <GitBranch size={18} />
-              </a>
-            )}
-
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-slate-700 transition-colors"
-                aria-label="Live demo"
-              >
-                <ExternalLink size={18} />
-              </a>
-            )}
-          </div>
         </div>
 
-        <h3
-          className="font-display font-extrabold text-[#0F172A] mb-1"
-          style={{ fontSize: isFlagship ? 'clamp(1.75rem, 3vw, 2.25rem)' : 'clamp(1.5rem, 3vw, 2rem)', letterSpacing: '-0.03em' }}
-        >
+        <h3 className="font-editorial text-xl font-bold leading-tight tracking-[-0.035em]">
           {project.title}
         </h3>
-        <p className="text-indigo-600 font-medium text-sm mb-4">
-          {project.subtitle}
-        </p>
-        <p className="text-slate-600 mb-6" style={{ lineHeight: 1.75 }}>
+
+        <p className="mt-2 text-sm leading-6 text-[#4A4E69]">
           {project.description}
         </p>
 
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-2">
-          {project.stack.map((tech) => (
-            <span key={tech} className="tag">{tech}</span>
-          ))}
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
+          <span className="inline-block rounded-md bg-[#C9ADA7]/40 px-3 py-1.5 text-[11px] font-semibold">
+            {project.role}
+          </span>
+
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.linkLabel}: ${project.title}`}
+              className="flex min-h-11 w-fit items-center gap-2 text-xs font-semibold underline underline-offset-4 transition-colors hover:text-[#4A4E69]"
+            >
+              {project.linkLabel}
+              <ArrowUpRight size={15} aria-hidden="true" />
+            </a>
+          )}
         </div>
       </div>
-
     </article>
   )
 }
 
 export default function Work() {
-  const tagRef     = useRef(null)
-  const headingRef = useRef(null)
-  const subRef     = useRef(null)
-  const listRef    = useRef(null)
-  const miniRef    = useRef(null)
+  const sectionRef = useRef(null)
 
-  useEffect(() => {
-    gsap.set([tagRef.current, headingRef.current, subRef.current, listRef.current, miniRef.current], { opacity: 1, y: 0 })
-    const ctx = gsap.context(() => {
-      gsap.from(tagRef.current, {
-        opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: tagRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(headingRef.current, {
-        opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: headingRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(subRef.current, {
-        opacity: 0, y: 20, duration: 0.7, ease: 'power2.out',
-        scrollTrigger: { trigger: subRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(listRef.current.children, {
-        opacity: 0, y: 40, duration: 0.7, ease: 'power2.out', stagger: 0.15,
-        scrollTrigger: { trigger: listRef.current, start: 'top 80%', once: true },
-      })
-      gsap.from(miniRef.current.children, {
-        opacity: 0, y: 30, duration: 0.6, ease: 'power2.out', stagger: 0.1,
-        scrollTrigger: { trigger: miniRef.current, start: 'top 85%', once: true },
-      })
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia()
+
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        gsap.utils.toArray('[data-work-reveal]').forEach((element) => {
+          gsap.from(element, {
+            opacity: 0,
+            y: 24,
+            duration: 0.75,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 92%',
+              once: true,
+            },
+          })
+        })
+      }, sectionRef)
+
+      return () => context.revert()
     })
-    return () => ctx.revert()
+
+    return () => media.revert()
   }, [])
 
   return (
-    <section id="work" className="section-padding bg-white">
-      <div className="container-custom">
-
-        {/* Header */}
-        <div className="max-w-2xl mb-16">
-          <span ref={tagRef} className="section-label">Case Studies</span>
+    <section
+      id="work"
+      ref={sectionRef}
+      aria-labelledby="work-heading"
+      className="bg-[#F2E9E4] pb-14 pt-6 text-[#22223B] md:pb-20"
+    >
+      <div className="mx-auto max-w-300 px-5 md:px-8 xl:px-0">
+        <div className="mb-7 flex flex-wrap items-center gap-4 md:mb-9">
           <h2
-            ref={headingRef}
-            className="font-display font-extrabold text-[#0F172A] mb-4"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.03em', lineHeight: 1.1 }}
+            id="work-heading"
+            className="font-editorial text-3xl font-bold tracking-[-0.04em] md:text-4xl"
           >
-            Real problems. Real solutions. Real code.
+            Selected projects
           </h2>
-          <p
-            ref={subRef}
-            className="text-slate-500"
-            style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
+
+          <span
+            aria-hidden="true"
+            className="hidden h-px flex-1 bg-[#9A8C98] sm:block"
+          />
+
+          <a
+            href="#more-work"
+            className="ml-auto inline-flex min-h-11 items-center gap-2 text-xs font-semibold underline-offset-4 hover:underline"
           >
-            A selection of projects showcasing full-stack development, scalable architecture, and practical business solutions.
-          </p>
+            More work
+            <ArrowDown size={15} aria-hidden="true" />
+          </a>
         </div>
 
-        <div ref={listRef} className="space-y-6 mb-16">
-          {FEATURED_PROJECTS.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-            />
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {SELECTED_PROJECTS.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
 
-        {/* Mini projects */}
-        <div>
-          <h3
-            className="font-display font-bold text-[#0F172A] mb-6"
-            style={{ fontSize: '1.25rem', letterSpacing: '-0.02em' }}
-          >
-            Other projects
-          </h3>
-          <div ref={miniRef} className="grid grid-cols-2 gap-4">
-            {MINI_PROJECTS.map((project) => (
-              <div key={project.id} className="card p-5 md:p-6">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <h4
-                    className="font-display font-bold text-[#0F172A]"
-                    style={{ fontSize: '1rem', letterSpacing: '-0.02em' }}
-                  >
+        <div id="more-work" className="scroll-mt-24 pt-10 md:pt-12">
+          <div className="mb-6 flex items-center gap-4">
+            <h3 className="font-editorial text-2xl font-bold tracking-[-0.035em]">
+              More work & concepts
+            </h3>
+
+            <span
+              aria-hidden="true"
+              className="h-px flex-1 bg-[#9A8C98]/60"
+            />
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {MORE_PROJECTS.map((project) => (
+              <article
+                key={project.id}
+                data-work-reveal
+                className="rounded-xl border border-[#C9ADA7] p-5"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <h4 className="font-editorial text-xl font-bold">
                     {project.title}
                   </h4>
-                  {project.github && (
-                    
-                    <a
-                      href='https://github.com/Barakat-20'
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate-400 hover:text-slate-700 transition-colors flex-shrink-0"
-                      aria-label="GitHub repository"
-                    >
-                      <GitBranch size={16} />
-                    </a>
+
+                  {project.tagType === 'concept' && (
+                    <span className="shrink-0 rounded-full bg-[#C9ADA7]/40 px-2.5 py-1 text-[10px] font-medium">
+                      Concept
+                    </span>
                   )}
                 </div>
-                <p className="text-sm text-slate-500 mb-4" style={{ lineHeight: 1.7 }}>
+
+                <p className="mt-3 text-sm leading-7 text-[#4A4E69]">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <span key={tech} className="tag">{tech}</span>
+
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {project.stack.map((technology) => (
+                    <li
+                      key={technology}
+                      className="rounded-md bg-[#C9ADA7]/40 px-2.5 py-1 text-[11px]"
+                    >
+                      {technology}
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </article>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   )
