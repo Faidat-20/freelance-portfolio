@@ -1,163 +1,165 @@
-import { useEffect, useRef } from 'react'
-import { gsap, ScrollTrigger } from '@utils/gsap'
+import { useLayoutEffect, useRef } from 'react'
+import { ArrowUpRight } from 'lucide-react'
+import { gsap } from '@utils/gsap'
 
 const VALUES = [
   {
-    title: 'Clean Architecture',
+    title: 'Code you can build on',
     description:
-      'Maintainable, scalable code that is easy to understand and extend.',
+      'Organised, maintainable code that makes future updates easier.',
   },
   {
-    title: 'Business Focus',
+    title: 'Your business comes first',
     description:
-      'Every feature is built to solve a real business problem and deliver measurable value.',
+      'We start with what your users need and what the software needs to achieve.',
   },
   {
-    title: 'Clear Communication',
+    title: 'You stay in the loop',
     description:
-      'Regular updates, transparent timelines, and proactive communication throughout the project.',
+      'Clear updates on progress, decisions and anything that affects delivery.',
   },
   {
-    title: 'Reliable Delivery',
+    title: 'Care through to launch',
     description:
-      'I deliver what I commit to and communicate early whenever priorities change.',
+      'Testing, deployment and a clear handover are part of the work.',
   },
 ]
 
 export default function About() {
-  const tagRef     = useRef(null)
-  const headingRef = useRef(null)
-  const bioRef     = useRef(null)
-  const cardsRef   = useRef(null)
+  const sectionRef = useRef(null)
 
-  useEffect(() => {
-    gsap.set([tagRef.current, headingRef.current, bioRef.current], { opacity: 1, y: 0 })
-    gsap.set(cardsRef.current.children, { opacity: 1, y: 0 })
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia()
 
-    gsap.from(tagRef.current, {
-      opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
-      scrollTrigger: { trigger: tagRef.current, start: 'top 85%', once: true },
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        gsap.from('[data-about-intro]', {
+          opacity: 0,
+          y: 24,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '[data-about-heading]',
+            start: 'top 88%',
+            once: true,
+          },
+        })
+
+        gsap.utils.toArray('[data-about-value]').forEach((row) => {
+          gsap.from(row, {
+            opacity: 0,
+            y: 20,
+            duration: 0.65,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: row,
+              start: 'top 92%',
+              once: true,
+            },
+          })
+        })
+      }, sectionRef)
+
+      return () => context.revert()
     })
-    gsap.from(headingRef.current, {
-      opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
-      scrollTrigger: { trigger: headingRef.current, start: 'top 85%', once: true },
-    })
-    gsap.from(bioRef.current, {
-      opacity: 0, y: 24, duration: 0.7, ease: 'power2.out',
-      scrollTrigger: { trigger: bioRef.current, start: 'top 85%', once: true },
-    })
-    gsap.from(cardsRef.current.children, {
-      opacity: 0, y: 30, duration: 0.6, ease: 'power2.out', stagger: 0.12,
-      scrollTrigger: { trigger: cardsRef.current, start: 'top 85%', once: true },
-    })
+
+    return () => media.revert()
   }, [])
 
   return (
-    <section id="about" className="section-padding bg-white">
-      <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+    <section
+      id="about"
+      ref={sectionRef}
+      aria-labelledby="about-heading"
+      className="bg-[#C9ADA7] py-16 text-[#22223B] md:py-20 lg:py-24"
+    >
+      <div className="mx-auto w-[calc(100%-40px)] max-w-[1200px] md:w-[calc(100%-64px)] min-[1001px]:w-[calc(100%-96px)]">
+        <div className="mb-10 flex items-center gap-4 md:mb-14">
+          <span className="text-[11px] font-semibold tracking-[0.16em] text-[#4A4E69]">
+            01 / ABOUT
+          </span>
+          <span className="h-px flex-1 bg-[#9A8C98]" aria-hidden="true" />
+        </div>
 
-          {/* Left — About */}
+        <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
           <div>
-            <span ref={tagRef} className="section-label">
-              About
-            </span>
+            <p
+              data-about-intro
+              className="mb-4 text-sm font-medium text-[#22223B]"
+            >
+              The developer behind the work
+            </p>
 
             <h2
-              ref={headingRef}
-              className="font-display font-extrabold text-[#0F172A] mb-6"
-              style={{
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
-                letterSpacing: '-0.03em',
-                lineHeight: 1.1,
-              }}
+              id="about-heading"
+              data-about-heading
+              data-about-intro
+              className="max-w-xl text-[clamp(2rem,3.5vw,3.25rem)] font-extrabold leading-[1.12] tracking-[-0.05em]"
             >
-              Building software that solves real business problems.
+              I care about how it looks.
+              <span className="block text-[#4A4E69]">
+                And how it works.
+              </span>
             </h2>
 
-            <div
-              ref={bioRef}
-              className="space-y-5 text-slate-600"
-              style={{
-                fontSize: '1.0625rem',
-                lineHeight: 1.8,
-              }}
+            <div className="mt-7 max-w-lg space-y-5 text-[15px] leading-8 text-[#22223B]">
+              <p data-about-intro>
+                I’m Faidat, a full-stack developer. I build the parts your
+                customers see and the systems that keep everything running —
+                from responsive interfaces to databases, APIs and payments.
+              </p>
+
+              <p data-about-intro>
+                My work includes e-commerce platforms, dashboards and custom
+                web applications. I enjoy turning a complicated requirement
+                into something straightforward to use and easy to maintain.
+              </p>
+            </div>
+
+            <a
+              data-about-intro
+              href="#work"
+              className="group mt-8 inline-flex min-h-11 items-center gap-3 border-b border-[#4A4E69] pb-1 text-sm font-semibold text-[#22223B] transition-colors hover:text-[#4A4E69]"
             >
-              <p>
-                I'm a Full-Stack Developer who builds scalable web applications from
-                backend architecture and APIs to responsive, intuitive user interfaces.
-                My focus is creating software that's reliable, maintainable, and built
-                to support real business growth.
-              </p>
-
-              <p>
-                I've developed e-commerce platforms, SaaS dashboards, admin systems, and
-                custom web applications while integrating payment gateways such as
-                Flutterwave and Paystack. I value clean code, clear communication, and
-                delivering solutions that continue to perform long after launch.
-              </p>
-            </div>
-
-            {/* Mini Workflow */}
-            <div className="mt-10 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600 mb-5">
-                How I work
-              </p>
-
-              <div className="grid sm:grid-cols-2 gap-3 text-sm text-slate-700">
-                <div>✓ Discovery & Planning</div>
-                <div>✓ UI/UX Design</div>
-                <div>✓ Full-Stack Development</div>
-                <div>✓ Testing & Deployment</div>
-                <div>✓ Ongoing Support</div>
-              </div>
-            </div>
+              Take a look at my work
+              <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+              />
+            </a>
           </div>
 
-          {/* Right — What you can expect */}
           <div>
+            <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.14em] text-[#22223B]">
+              What working together looks like
+            </h3>
 
-            <div className="mb-8">
-              <h3
-                className="font-display font-bold text-[#0F172A] mb-2"
-                style={{
-                  fontSize: '1.5rem',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                What you can expect
-              </h3>
+            <ol className="border-t border-[#9A8C98]">
+              {VALUES.map(({ title, description }, index) => (
+                <li
+                  key={title}
+                  data-about-value
+                  className="group grid grid-cols-[28px_1fr] gap-4 border-b border-[#9A8C98] py-6"
+                >
+                  <span className="pt-1 font-mono text-xs text-[#4A4E69]">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
 
-              <p className="text-slate-500">
-                Here's what it's like working with me on every project.
-              </p>
-            </div>
+                  <div>
+                    <h4 className="mb-2 text-base font-bold tracking-[-0.02em] transition-colors group-hover:text-[#4A4E69]">
+                      {title}
+                    </h4>
 
-            <div ref={cardsRef} className="grid sm:grid-cols-2 gap-4">
-              {VALUES.map((value) => (
-                <div key={value.title} className="card p-6">
-                  <h3
-                    className="font-display font-bold text-[#0F172A] mb-3"
-                    style={{
-                      fontSize: '1rem',
-                      letterSpacing: '-0.02em',
-                    }}
-                  >
-                    {value.title}
-                  </h3>
-
-                  <p
-                    className="text-sm text-slate-500"
-                    style={{ lineHeight: 1.7 }}
-                  >
-                    {value.description}
-                  </p>
-                </div>
+                    <p className="max-w-sm text-sm leading-7 text-[#22223B]">
+                      {description}
+                    </p>
+                  </div>
+                </li>
               ))}
-            </div>
-
+            </ol>
           </div>
-
         </div>
       </div>
     </section>

@@ -1,9 +1,8 @@
 import { useLayoutEffect, useRef } from 'react'
-import { ArrowDown, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { gsap } from '@utils/gsap'
 import { getPlatformLinks } from '../../utils/platform'
-
-const TECHNOLOGIES = ['React', 'Next.js', 'TypeScript', 'Node.js', 'Python']
+import HeroShowcase from './HeroShowcase'
 
 export default function Hero() {
   const sectionRef = useRef(null)
@@ -16,30 +15,10 @@ export default function Hero() {
       const context = gsap.context(() => {
         gsap.from('[data-hero-reveal]', {
           opacity: 0,
-          y: 24,
+          y: 22,
           duration: 0.85,
-          stagger: 0.1,
+          stagger: 0.12,
           ease: 'power3.out',
-        })
-
-        gsap.from('.portfolio-photo-frame', {
-          clipPath: 'inset(0% 0% 100% 0%)',
-          duration: 1.15,
-          delay: 0.15,
-          ease: 'power3.inOut',
-        })
-
-        gsap.from('.portfolio-photo', {
-          scale: 1.06,
-          duration: 1.4,
-          ease: 'power3.out',
-        })
-
-        gsap.from('.portfolio-photo-caption', {
-          opacity: 0,
-          y: 12,
-          duration: 0.7,
-          delay: 0.8,
         })
       }, sectionRef)
 
@@ -54,81 +33,75 @@ export default function Hero() {
     : {}
 
   return (
-    <section id="hero" ref={sectionRef} className="portfolio-hero">
-      <div className="portfolio-shell">
-        <div className="portfolio-hero-grid">
-          <div className="portfolio-hero-copy">
-            <p className="portfolio-eyebrow" data-hero-reveal>
-              <span aria-hidden="true" />
-              Independent full-stack developer
+    <section
+      id="hero"
+      ref={sectionRef}
+      aria-labelledby="hero-heading"
+      className="overflow-hidden bg-[#F2E9E4] text-[#22223B]"
+    >
+      <div className="mx-auto grid max-w-300 items-center gap-10 px-5 py-10 md:grid-cols-[1.1fr_1fr] md:px-8 md:py-12 lg:gap-14 xl:px-0">
+        <div>
+          <div
+            data-hero-reveal
+            className="mb-5 flex items-center gap-4"
+          >
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em]">
+              Full-stack developer
             </p>
-
-            <p className="portfolio-intro" data-hero-reveal>
-              Hi, I’m Faidat Egberinde.
-            </p>
-
-            <h1 className="portfolio-headline">
-              <span data-hero-reveal>Websites with</span>
-              <span data-hero-reveal>purpose.</span>
-              <span className="portfolio-accent" data-hero-reveal>
-                Apps that work.
-              </span>
-            </h1>
-
-            <p className="portfolio-description" data-hero-reveal>
-              I turn business ideas into websites and web applications —
-              building everything from the interface to the systems behind it.
-            </p>
-
-            <div className="portfolio-hero-actions" data-hero-reveal>
-              <a href="#work" className="portfolio-button portfolio-button-primary">
-                Explore my work
-                <ArrowUpRight size={19} aria-hidden="true" />
-              </a>
-
-              <a
-                href={platform.href}
-                {...externalProps}
-                className="portfolio-button portfolio-button-text"
-              >
-                {platform.heroLabel}
-                <ArrowUpRight size={18} aria-hidden="true" />
-              </a>
-            </div>
+            <span
+              aria-hidden="true"
+              className="h-px w-12 bg-[#9A8C98]"
+            />
           </div>
 
-          <figure className="portfolio-portrait">
-            <div className="portfolio-photo-frame">
-              <img
-                src="/images/faidat.png"
-                alt="Faidat Egberinde"
-                fetchPriority="high"
-                className="portfolio-photo"
+          <h1
+            id="hero-heading"
+            className="font-editorial text-[clamp(2.5rem,4.8vw,4.3rem)] font-bold leading-[1.06] tracking-[-0.045em]"
+          >
+            <span data-hero-reveal className="block">
+              Your next idea,
+            </span>
+            <span data-hero-reveal className="block">
+              brought to life.
+            </span>
+          </h1>
+
+          <p
+            data-hero-reveal
+            className="mt-6 max-w-117.5 text-base leading-8 text-[#4A4E69]"
+          >
+            I’m Faidat Egberinde, a full-stack developer. I build complete
+            web applications—from responsive interfaces to databases,
+            APIs and deployment.
+          </p>
+
+          <div
+            data-hero-reveal
+            className="mt-7 flex flex-wrap items-center gap-4"
+          >
+            <a
+              href="#work"
+              className="group inline-flex min-h-12 items-center justify-center gap-4 rounded-md bg-[#22223B] px-6 text-sm font-semibold text-[#F2E9E4] transition-colors hover:bg-[#4A4E69]"
+            >
+              Explore my work
+              <ArrowRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform motion-safe:group-hover:translate-x-1"
               />
-            </div>
+            </a>
 
-            <figcaption className="portfolio-photo-caption">
-              <span>Faidat Egberinde</span>
-              <span>Developer & problem solver</span>
-            </figcaption>
-          </figure>
-        </div>
-
-        <div className="portfolio-hero-bottom" data-hero-reveal>
-          <div className="portfolio-tech">
-            <span className="portfolio-tech-label">My toolkit</span>
-            <ul aria-label="Technologies I use">
-              {TECHNOLOGIES.map((technology) => (
-                <li key={technology}>{technology}</li>
-              ))}
-            </ul>
+            <a
+              href={platform.external ? platform.href : '#cta'}
+              {...externalProps}
+              className="inline-flex min-h-12 items-center justify-center rounded-md border border-[#22223B] px-6 text-sm font-semibold transition-colors hover:bg-[#C9ADA7]/35"
+            >
+              {platform.external ? platform.navLabel : 'Let’s work together'}
+            </a>
           </div>
-
-          <a href="#work" className="portfolio-scroll-link">
-            Discover my work
-            <ArrowDown size={16} aria-hidden="true" />
-          </a>
         </div>
+
+        <HeroShowcase />
       </div>
     </section>
   )
