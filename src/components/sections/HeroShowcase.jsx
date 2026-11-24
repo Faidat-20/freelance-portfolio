@@ -131,7 +131,7 @@ export default function HeroShowcase() {
       ref={rootRef}
       role="img"
       aria-label="Automatically shuffling stack featuring Faidat Egberinde and four projects: Jomi Global, LearnLoop, Jikes Cosmetics and Stock Analysis Dashboard"
-      className="relative isolate mx-auto hidden h-[410px] w-full max-w-[430px] md:block lg:h-[440px]"
+      className="relative isolate mx-auto hidden h-102.5 w-full max-w-107.5 md:block lg:h-110"
     >
       {CARDS.map((card, index) => {
         const position = POSITIONS[index]
@@ -141,7 +141,7 @@ export default function HeroShowcase() {
             key={card.title}
             data-stack-card
             aria-hidden="true"
-            className="absolute inset-x-8 top-8 flex h-[310px] flex-col overflow-hidden rounded-xl border border-[#9A8C98]/50 bg-[#F2E9E4] p-2 shadow-[0_8px_22px_rgba(34,34,59,0.14)] lg:h-[335px]"
+            className="absolute inset-x-8 top-8 flex h-77.5 flex-col overflow-hidden rounded-xl border border-[#9A8C98]/50 bg-[#F2E9E4] p-2 shadow-[0_8px_22px_rgba(34,34,59,0.14)] lg:h-83.75"
             style={{
               zIndex: CARDS.length - index,
               transform: `translate(${position.x}px, ${position.y}px) rotate(${position.rotation}deg) scale(${position.scale})`,
