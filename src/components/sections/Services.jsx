@@ -1,94 +1,108 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
+import {
+  Bug,
+  Code2,
+  Database,
+  LayoutDashboard,
+  Server,
+  ShoppingCart,
+} from 'lucide-react'
 import { gsap } from '@utils/gsap'
 import { SERVICES } from '@data/services'
-import {
-  LayoutDashboard, ShoppingCart, Code2, BarChart2,
-  Server, Plug, Lock, Database, Smartphone, Globe, Zap, Bug, CheckCircle2,
-} from 'lucide-react'
 
 const ICON_MAP = {
-  LayoutDashboard, ShoppingCart, Code2, BarChart2,
-  Server, Plug, Lock, Database, Smartphone, Globe, Zap, Bug,
+  Bug,
+  Code2,
+  Database,
+  LayoutDashboard,
+  Server,
+  ShoppingCart,
 }
 
 export default function Services() {
-  const tagRef      = useRef(null)
-  const headingRef  = useRef(null)
-  const subRef      = useRef(null)
-  const gridRef     = useRef(null)
+  const sectionRef = useRef(null)
 
-  useEffect(() => {
-    gsap.set([tagRef.current, headingRef.current, subRef.current, gridRef.current], { opacity: 1, y: 0 })
-    const ctx = gsap.context(() => {
-      gsap.from(tagRef.current, {
-        opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: tagRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(headingRef.current, {
-        opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: headingRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(subRef.current, {
-        opacity: 0, y: 20, duration: 0.7, ease: 'power2.out',
-        scrollTrigger: { trigger: subRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(gridRef.current.children, {
-        opacity: 0, y: 30, duration: 0.6, ease: 'power2.out', stagger: 0.08,
-        scrollTrigger: { trigger: gridRef.current, start: 'top 80%', once: true },
-      })
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia()
+
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        gsap.utils.toArray('[data-service-reveal]').forEach((element) => {
+          gsap.from(element, {
+            opacity: 0,
+            y: 22,
+            duration: 0.7,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 92%',
+              once: true,
+            },
+          })
+        })
+      }, sectionRef)
+
+      return () => context.revert()
     })
-    return () => ctx.revert()
+
+    return () => media.revert()
   }, [])
 
   return (
-    <section id="services" className="section-padding bg-[#FAFAFA]">
-      <div className="container-custom">
+    <section
+      id="services"
+      ref={sectionRef}
+      aria-labelledby="services-heading"
+      className="bg-[#FAF8F6] py-12 text-[#22223B] md:py-16"
+    >
+      <div className="mx-auto max-w-300 px-5 md:px-8 xl:px-0">
+        <div data-service-reveal className="mb-8 md:mb-10">
+          <div className="flex items-center gap-4">
+            <h2
+              id="services-heading"
+              className="font-editorial text-3xl font-bold tracking-[-0.04em] md:text-4xl"
+            >
+              What I can help you build
+            </h2>
 
-        {/* Header */}
-        <div className="max-w-2xl mb-16">
-          <span ref={tagRef} className="section-label">What I build</span>
-          <h2
-            ref={headingRef}
-            className="font-display font-extrabold text-[#0F172A] mb-4"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.03em', lineHeight: 1.1 }}
-          >
-            Services I provide.
-          </h2>
-          <p
-            ref={subRef}
-            className="text-slate-500"
-            style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
-          >
-            I build complete web solutions from planning and UI development to backend systems, APIs, database design, deployment, and ongoing support.
+            <span
+              aria-hidden="true"
+              className="hidden h-px flex-1 bg-[#9A8C98]/70 sm:block"
+            />
+          </div>
+
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-[#4A4E69]">
+            From a new website to the systems behind your business,
+            I can help with the complete build or a specific part
+            of your application.
           </p>
         </div>
 
-        {/* Services grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-        >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service) => {
-            const Icon = ICON_MAP[service.icon]
+            const Icon = ICON_MAP[service.icon] || Code2
+
             return (
-              <div key={service.title} className="card p-6 group">
-                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5 group-hover:bg-indigo-100 transition-colors">
-                  {Icon && <Icon size={24} className="text-indigo-600" strokeWidth={1.8} />}
+              <article
+                key={service.title}
+                data-service-reveal
+                className="group rounded-xl border border-[#C9ADA7]/80 bg-[#F2E9E4]/50 p-5 transition-colors hover:border-[#4A4E69] hover:bg-[#F2E9E4]"
+              >
+                <div className="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-[#C9ADA7]/40 text-[#4A4E69] transition-colors group-hover:bg-[#22223B] group-hover:text-[#F2E9E4]">
+                  <Icon size={21} strokeWidth={1.6} aria-hidden="true" />
                 </div>
-                <h3
-                  className="font-display font-bold text-[#0F172A] mb-2"
-                  style={{ fontSize: '1.05rem', letterSpacing: '-0.02em' }}
-                >
+
+                <h3 className="font-editorial text-xl font-bold leading-tight tracking-tight">
                   {service.title}
                 </h3>
-                <p className="text-sm text-slate-500" style={{ lineHeight: 1.7 }}>
+
+                <p className="mt-3 text-sm leading-6 text-[#4A4E69]">
                   {service.description}
                 </p>
-              </div>
+              </article>
             )
           })}
         </div>
-
       </div>
     </section>
   )
