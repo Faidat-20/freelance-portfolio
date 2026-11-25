@@ -1,98 +1,94 @@
-import { useEffect, useRef } from 'react'
-import { gsap } from '@utils/gsap'
-import { UPWORK_URL } from '@constants'
+import { useLayoutEffect, useRef } from 'react'
 import { ArrowRight } from 'lucide-react'
+import { gsap } from '@utils/gsap'
+import { getPlatformLinks } from '../../utils/platform'
 
 export default function CTA() {
   const sectionRef = useRef(null)
-  const headingRef = useRef(null)
-  const subRef     = useRef(null)
-  const btnRef     = useRef(null)
-  const noteRef    = useRef(null)
+  const platform = getPlatformLinks()
 
-  useEffect(() => {
-    gsap.set([headingRef.current, subRef.current, btnRef.current, noteRef.current], { opacity: 1, y: 0 })
-    const ctx = gsap.context(() => {
-      gsap.from(headingRef.current, {
-        opacity: 0, y: 40, duration: 0.9, ease: 'power2.out',
-        scrollTrigger: { trigger: headingRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(subRef.current, {
-        opacity: 0, y: 24, duration: 0.7, ease: 'power2.out', delay: 0.1,
-        scrollTrigger: { trigger: subRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(btnRef.current, {
-        opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', delay: 0.2,
-        scrollTrigger: { trigger: btnRef.current, start: 'top 90%', once: true },
-      })
-      gsap.from(noteRef.current, {
-        opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', delay: 0.3,
-        scrollTrigger: { trigger: noteRef.current, start: 'top 90%', once: true },
-      })
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia()
+
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        gsap.from('[data-cta-reveal]', {
+          opacity: 0,
+          y: 22,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 90%',
+            once: true,
+          },
+        })
+      }, sectionRef)
+
+      return () => context.revert()
     })
-    return () => ctx.revert()
+
+    return () => media.revert()
   }, [])
 
   return (
     <section
       id="cta"
       ref={sectionRef}
-      className="section-padding bg-[#0F172A] relative overflow-hidden"
+      aria-labelledby="cta-heading"
+      className="bg-[#F2E9E4] px-5 pb-12 pt-3 text-[#22223B] md:px-8 md:pb-16"
     >
-      {/* Background glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.07] blur-[100px]"
-        style={{ background: 'radial-gradient(circle, #6366F1, transparent)' }}
-        aria-hidden="true"
-      />
-
-      <div className="container-custom relative z-10 text-center">
-
-        <h2
-          ref={headingRef}
-          className="font-display font-extrabold text-white mx-auto mb-6"
-          style={{
-            fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-            letterSpacing: '-0.04em',
-            lineHeight: 1.05,
-            maxWidth: '14ch',
-          }}
-        >
-          Ready to build your next product?
-        </h2>
-
-        <p
-          ref={subRef}
-          className="text-slate-400 mx-auto mb-10"
-          style={{
-            fontSize: 'clamp(1rem, 2vw, 1.125rem)',
-            lineHeight: 1.75,
-            maxWidth: '42ch',
-          }}
-        >
-          Let's discuss your project and turn your idea into a production-ready application.
-        </p>
-
-        <div ref={btnRef} className="flex flex-wrap items-center justify-center gap-4 mb-10">
-          
-          <a
-            href='https://www.upwork.com/freelancers/~01e4f8c78897674cc0?viewMode=1'
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary text-base px-8 py-4"
+        data-cta-reveal
+        className="mx-auto flex max-w-300 flex-col items-start justify-between gap-6 rounded-2xl bg-[#C9ADA7] px-6 py-8 md:flex-row md:items-center md:gap-10 md:px-10 md:py-10"
+      >
+        <div className="max-w-2xl">
+          <h2
+            id="cta-heading"
+            className="font-editorial text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl"
           >
-            Hire me on Upwork
-            <ArrowRight size={18} />
-          </a>
+            Have a project in mind?
+          </h2>
+
+          <p className="mt-3 text-sm leading-7">
+            Let’s discuss what you need and how I can help build it.
+          </p>
+
+          {!platform.external && (
+            <p className="mt-2 max-w-lg text-sm leading-7">
+              Send me a message on the platform where you found
+              my portfolio, with a brief outline of your project.
+            </p>
+          )}
         </div>
 
-        <p
-          ref={noteRef}
-          className="text-sm text-slate-600"
-        >
-          Usually replies within 24 hours.
-        </p>
-
+        {platform.external ? (
+          <a
+            href={platform.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex min-h-12 shrink-0 items-center justify-center gap-4 rounded-md bg-[#22223B] px-6 text-sm font-semibold text-[#F2E9E4] transition-colors hover:bg-[#4A4E69]"
+          >
+            {platform.navLabel}
+            <ArrowRight
+              size={18}
+              aria-hidden="true"
+              className="transition-transform motion-safe:group-hover:translate-x-1"
+            />
+          </a>
+        ) : (
+          <a
+            href="#services"
+            className="group inline-flex min-h-12 shrink-0 items-center justify-center gap-4 rounded-md bg-[#22223B] px-6 text-sm font-semibold text-[#F2E9E4] transition-colors hover:bg-[#4A4E69]"
+          >
+            Explore my services
+            <ArrowRight
+              size={18}
+              aria-hidden="true"
+              className="transition-transform motion-safe:group-hover:translate-x-1"
+            />
+          </a>
+        )}
       </div>
     </section>
   )
