@@ -138,7 +138,7 @@ export default function Work() {
       id="work"
       ref={sectionRef}
       aria-labelledby="work-heading"
-      className="bg-[#F2E9E4] pb-14 pt-6 text-[#22223B] md:pb-20"
+      className="bg-[#FAF8F6] pb-14 pt-6 text-[#22223B] md:pb-20"
     >
       <div className="mx-auto max-w-300 px-5 md:px-8 xl:px-0">
         <div className="mb-7 flex flex-wrap items-center gap-4 md:mb-9">

@@ -1,137 +1,138 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
+import { Database } from 'lucide-react'
 import { gsap } from '@utils/gsap'
 
-const TECH_STACK = [
-  'PHP',
+const PRIMARY_TOOLS = [
+  { name: 'React', mark: '⚛' },
+  { name: 'Next.js', mark: 'N' },
+  { name: 'TypeScript', mark: 'TS' },
+  { name: 'Node.js', mark: 'JS' },
+  { name: 'Python', mark: 'Py' },
+  { name: 'SQL', database: true },
+]
+
+const OTHER_TOOLS = [
   'JavaScript',
-  'Typescript',
-  'React',
-  'Node.js',
-  'MySQL',
+  'PHP',
+  'FastAPI',
   'MongoDB',
+  'MySQL',
   'Tailwind CSS',
   'GSAP',
-  'REST API',
-  'API Integration',
   'Git',
   'GitHub',
   'Postman',
+  'REST APIs',
+  'API Integration',
+  'React Query',
+  'SWR',
+  'GitHub Actions',
+  'AWS',
+  'Vercel',
+  'Render',
   'Flutterwave',
   'Paystack',
 ]
 
 export default function Skills() {
-  const tagRef = useRef(null)
-  const headingRef = useRef(null)
-  const subRef = useRef(null)
-  const stackRef = useRef(null)
+  const sectionRef = useRef(null)
 
-  useEffect(() => {
-    gsap.set(
-      [tagRef.current, headingRef.current, subRef.current, stackRef.current],
-      { opacity: 1, y: 0 }
-    )
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia()
 
-    const ctx = gsap.context(() => {
-      gsap.from(tagRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: tagRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-      })
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        gsap.utils.toArray('[data-skill-reveal]').forEach((element) => {
+          gsap.from(element, {
+            opacity: 0,
+            y: 18,
+            duration: 0.65,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 92%',
+              once: true,
+            },
+          })
+        })
+      }, sectionRef)
 
-      gsap.from(headingRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-      })
-
-      gsap.from(subRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.7,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: subRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-      })
-
-      gsap.from(stackRef.current.children, {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.05,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: stackRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-      })
+      return () => context.revert()
     })
 
-    return () => ctx.revert()
+    return () => media.revert()
   }, [])
 
   return (
-    <section id="skills" className="section-padding bg-[#FAFAFA]">
-      <div className="container-custom">
-        <div className="max-w-2xl mb-12">
-          <span ref={tagRef} className="section-label">
-            Tech Stack
-          </span>
-
-          <h2
-            ref={headingRef}
-            className="font-display font-extrabold text-[#0F172A] mb-4"
-            style={{
-              fontSize: 'clamp(2rem,4vw,3rem)',
-              letterSpacing: '-0.03em',
-              lineHeight: 1.1,
-            }}
-          >
-            Technologies I work with.
-          </h2>
-
-          <p
-            ref={subRef}
-            className="text-slate-500"
-            style={{
-              fontSize: '1.0625rem',
-              lineHeight: 1.75,
-            }}
-          >
-            Modern tools and technologies I use to build fast, scalable web applications.
-          </p>
-        </div>
-
-        <div
-          ref={stackRef}
-          className="flex flex-wrap gap-3"
+    <section
+      id="skills"
+      ref={sectionRef}
+      aria-labelledby="skills-heading"
+      className="min-w-0 text-[#22223B]"
+    >
+      <div data-skill-reveal className="mb-5 flex items-center gap-4">
+        <h2
+          id="skills-heading"
+          className="font-editorial text-3xl font-bold tracking-[-0.04em]"
         >
-          {TECH_STACK.map((tech) => (
-            <span
-              key={tech}
-              className="tag px-4 py-2"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+          Tech I work with
+        </h2>
+
+        <span
+          aria-hidden="true"
+          className="h-px flex-1 bg-[#9A8C98]"
+        />
       </div>
+
+      <ul className="grid grid-cols-3 gap-2 sm:grid-cols-6 lg:grid-cols-3 xl:grid-cols-6">
+        {PRIMARY_TOOLS.map((tool) => (
+          <li
+            key={tool.name}
+            data-skill-reveal
+            className="flex min-h-23 flex-col items-center justify-center gap-3 rounded-lg border border-[#C9ADA7] px-2 py-4 transition-colors hover:border-[#4A4E69] hover:bg-[#C9ADA7]/20"
+          >
+            <span
+              aria-hidden="true"
+              className="flex h-8 items-center justify-center text-[#4A4E69]"
+            >
+              {tool.database ? (
+                <Database size={30} strokeWidth={1.4} />
+              ) : (
+                <span
+                  className={
+                    tool.name === 'React'
+                      ? 'text-4xl leading-none'
+                      : 'font-mono text-2xl font-semibold tracking-tight'
+                  }
+                >
+                  {tool.mark}
+                </span>
+              )}
+            </span>
+
+            <span className="text-center text-[10px] font-medium">
+              {tool.name}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <details className="group mt-5 border-t border-[#C9ADA7] pt-3">
+        <summary className="cursor-pointer py-2 text-xs font-semibold text-[#4A4E69] underline-offset-4 hover:underline">
+          More tools & integrations
+        </summary>
+
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {OTHER_TOOLS.map((tool) => (
+            <li
+              key={tool}
+              className="rounded-md bg-[#C9ADA7]/30 px-2.5 py-1.5 text-[11px] text-[#22223B]"
+            >
+              {tool}
+            </li>
+          ))}
+        </ul>
+      </details>
     </section>
   )
 }

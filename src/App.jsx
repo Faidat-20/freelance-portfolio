@@ -15,8 +15,12 @@ export default function App() {
       <main>
         <Hero />
         <Work />
-        <About />
-        <Skills />
+        <div className="border-y border-[#C9ADA7]/50 bg-[#E8DAD6] py-12 text-[#22223B] md:py-16">
+          <div className="mx-auto grid max-w-300 gap-10 px-5 md:px-8 lg:grid-cols-2 lg:gap-12 xl:px-0">
+            <About />
+            <Skills />
+          </div>
+        </div>
         <Services />
         <FAQ />
         <CTA />
