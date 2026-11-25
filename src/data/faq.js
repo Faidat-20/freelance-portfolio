@@ -1,5 +1,10 @@
 export const FAQ_ITEMS = [
   {
+    question: 'How do I get started?',
+    answer:
+      'Message me on the platform where you found my portfolio. Share a brief description of your project, your preferred timeline and any technical requirements. We can then discuss the scope and next steps.',
+  },
+  {
     question: 'Do you build full-stack applications?',
     answer:
       'Yes. I build complete web applications, from the database and backend APIs to responsive frontend interfaces.',
@@ -18,11 +23,5 @@ export const FAQ_ITEMS = [
     question: 'How long does a project take?',
     answer:
       'Timelines depend on the scope, but you will receive a realistic estimate before development begins.',
-  },
-
-  {
-    question: 'How do I get started?',
-    answer:
-      'Send me a message on Upwork with a brief description of your project, what you\'re building, your timeline, and any technical requirements. I\'ll review it and respond with questions or a proposal within 24 hours.',
   },
 ]

@@ -1,128 +1,129 @@
-import { useEffect, useRef, useState } from 'react'
+import { useId, useLayoutEffect, useRef, useState } from 'react'
+import { Plus, Minus } from 'lucide-react'
 import { gsap } from '@utils/gsap'
 import { FAQ_ITEMS } from '@data/faq'
-import { Plus, Minus } from 'lucide-react'
 
 function FAQItem({ item, isOpen, onToggle }) {
-  const answerRef = useRef(null)
-
-  useEffect(() => {
-    if (isOpen) {
-      gsap.from(answerRef.current, {
-        height: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-    }
-  }, [isOpen])
+  const id = useId()
 
   return (
-    <div className="border-b border-[#E2E8F0]">
-      <button
-        onClick={onToggle}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left"
-        aria-expanded={isOpen}
-      >
-        <span
-          className="font-display font-bold text-[#0F172A]"
-          style={{ fontSize: '1rem', letterSpacing: '-0.02em' }}
+    <div className="border-b border-[#C9ADA7]">
+      <h3>
+        <button
+          id={`${id}-question`}
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          aria-controls={`${id}-answer`}
+          className="flex min-h-16 w-full items-center justify-between gap-5 py-5 text-left"
         >
-          {item.question}
-        </span>
-        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center">
-          {isOpen
-            ? <Minus size={14} className="text-indigo-600" />
-            : <Plus size={14} className="text-indigo-600" />
-          }
-        </span>
-      </button>
-      {isOpen && (
-        <div ref={answerRef} className="pb-5">
-          <p className="text-slate-500 text-sm" style={{ lineHeight: 1.8 }}>
-            {item.answer}
-          </p>
-        </div>
-      )}
+          <span className="text-sm font-semibold leading-6 text-[#22223B]">
+            {item.question}
+          </span>
+
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#C9ADA7]/40 text-[#22223B]">
+            {isOpen ? (
+              <Minus size={15} aria-hidden="true" />
+            ) : (
+              <Plus size={15} aria-hidden="true" />
+            )}
+          </span>
+        </button>
+      </h3>
+
+      <div
+        id={`${id}-answer`}
+        aria-labelledby={`${id}-question`}
+        hidden={!isOpen}
+        className="pb-5 pr-10"
+      >
+        <p className="text-sm leading-7 text-[#4A4E69]">
+          {item.answer}
+        </p>
+      </div>
     </div>
   )
 }
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
-  const tagRef                    = useRef(null)
-  const headingRef                = useRef(null)
-  const subRef                    = useRef(null)
-  const listRef                   = useRef(null)
+  const sectionRef = useRef(null)
 
-  useEffect(() => {
-    gsap.set([tagRef.current, headingRef.current, subRef.current, listRef.current], { opacity: 1, y: 0 })
-    const ctx = gsap.context(() => {
-      gsap.from(tagRef.current, {
-        opacity: 0, y: 20, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: tagRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(headingRef.current, {
-        opacity: 0, y: 30, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: { trigger: headingRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(subRef.current, {
-        opacity: 0, y: 20, duration: 0.7, ease: 'power2.out',
-        scrollTrigger: { trigger: subRef.current, start: 'top 85%', once: true },
-      })
-      gsap.from(listRef.current.children, {
-        opacity: 0, y: 20, duration: 0.5, ease: 'power2.out', stagger: 0.08,
-        scrollTrigger: { trigger: listRef.current, start: 'top 85%', once: true },
-      })
+  useLayoutEffect(() => {
+    const media = gsap.matchMedia()
+
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      const context = gsap.context(() => {
+        gsap.utils.toArray('[data-faq-reveal]').forEach((element) => {
+          gsap.from(element, {
+            opacity: 0,
+            y: 20,
+            duration: 0.7,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 92%',
+              once: true,
+            },
+          })
+        })
+      }, sectionRef)
+
+      return () => context.revert()
     })
-    return () => ctx.revert()
+
+    return () => media.revert()
   }, [])
 
   return (
-    <section id="faq" className="section-padding bg-[#FAFAFA]">
-      <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+    <section
+      id="faq"
+      ref={sectionRef}
+      aria-labelledby="faq-heading"
+      className="border-t border-[#C9ADA7]/50 bg-[#F2E9E4] py-12 text-[#22223B] md:py-16"
+    >
+      <div className="mx-auto grid max-w-300 items-start gap-8 px-5 md:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 xl:px-0">
+        <div data-faq-reveal>
+          <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#4A4E69]">
+            Before we work together
+          </p>
 
-          {/* Left */}
-          <div className="lg:sticky lg:top-28">
-            <span ref={tagRef} className="section-label">FAQ</span>
-            <h2
-              ref={headingRef}
-              className="font-display font-extrabold text-[#0F172A] mb-4"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.03em', lineHeight: 1.1 }}
-            >
-              Questions clients usually ask.
-            </h2>
-            <p
-              ref={subRef}
-              className="text-slate-500 mb-8"
-              style={{ fontSize: '1.0625rem', lineHeight: 1.75 }}
-            >
-              Everything you need to know before reaching out
-              answered honestly.
+          <h2
+            id="faq-heading"
+            className="max-w-sm font-editorial text-3xl font-bold leading-tight tracking-[-0.04em] md:text-4xl"
+          >
+            A few questions,
+            <br />
+            answered.
+          </h2>
+
+          <p className="mt-5 max-w-sm text-sm leading-7 text-[#4A4E69]">
+            A little more about the work, the process and
+            getting your project started.
+          </p>
+
+          <div className="mt-6 max-w-sm rounded-xl border border-[#C9ADA7] bg-[#C9ADA7]/20 p-5">
+            <p className="text-sm font-semibold">
+              Have something else in mind?
             </p>
-            <div className="p-6 bg-indigo-50 border border-indigo-100 rounded-2xl">
-              <p className="text-sm font-medium text-indigo-900 mb-1">
-                Still have questions?
-              </p>
-              <p className="text-sm text-indigo-700">
-                Send me a message on Upwork and I'll respond within 24 hours.
-              </p>
-            </div>
+            <p className="mt-2 text-sm leading-7 text-[#4A4E69]">
+              Message me on the platform where you found my
+              portfolio. We can discuss what you need.
+            </p>
           </div>
+        </div>
 
-          {/* Right */}
-          <div ref={listRef}>
-            {FAQ_ITEMS.map((item, index) => (
-              <FAQItem
-                key={item.question}
-                item={item}
-                isOpen={openIndex === index}
-                onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
-              />
-            ))}
-          </div>
-
+        <div data-faq-reveal className="border-t border-[#C9ADA7]">
+          {FAQ_ITEMS.map((item, index) => (
+            <FAQItem
+              key={item.question}
+              item={item}
+              isOpen={openIndex === index}
+              onToggle={() =>
+                setOpenIndex((current) => (current === index ? -1 : index))
+              }
+            />
+          ))}
         </div>
       </div>
     </section>
