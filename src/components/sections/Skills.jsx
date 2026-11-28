@@ -1,14 +1,21 @@
 import { useLayoutEffect, useRef } from 'react'
 import { Database } from 'lucide-react'
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiNodedotjs,
+  SiPython,
+} from 'react-icons/si'
 import { gsap } from '@utils/gsap'
 
 const PRIMARY_TOOLS = [
-  { name: 'React', mark: '⚛' },
-  { name: 'Next.js', mark: 'N' },
-  { name: 'TypeScript', mark: 'TS' },
-  { name: 'Node.js', mark: 'JS' },
-  { name: 'Python', mark: 'Py' },
-  { name: 'SQL', database: true },
+  { name: 'React', icon: SiReact },
+  { name: 'Next.js', icon: SiNextdotjs },
+  { name: 'TypeScript', icon: SiTypescript },
+  { name: 'Node.js', icon: SiNodedotjs },
+  { name: 'Python', icon: SiPython },
+  { name: 'SQL', icon: Database },
 ]
 
 const OTHER_TOOLS = [
@@ -95,19 +102,7 @@ export default function Skills() {
               aria-hidden="true"
               className="flex h-8 items-center justify-center text-[#4A4E69]"
             >
-              {tool.database ? (
-                <Database size={30} strokeWidth={1.4} />
-              ) : (
-                <span
-                  className={
-                    tool.name === 'React'
-                      ? 'text-4xl leading-none'
-                      : 'font-mono text-2xl font-semibold tracking-tight'
-                  }
-                >
-                  {tool.mark}
-                </span>
-              )}
+              <tool.icon size={30} />
             </span>
 
             <span className="text-center text-[10px] font-medium">
