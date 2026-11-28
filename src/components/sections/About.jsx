@@ -52,16 +52,16 @@ export default function About() {
 
       <div className="space-y-4 text-sm leading-7 text-[#4A4E69]">
         <p data-about-reveal>
-          I’m Faidat, a full-stack developer who enjoys turning ideas
-          into practical web applications. I work across frontend
-          interfaces, backend logic, databases and API integrations.
+          I enjoy taking a complicated requirement and turning it into
+          something straightforward to use. My work covers frontend
+          interfaces, backend systems, databases and API integrations.
         </p>
 
         <p data-about-reveal>
-          My projects include e-commerce stores, learning interfaces
-          and data dashboards. I care about clear communication,
-          maintainable code and making the finished product
-          straightforward to use.
+          I’ve worked on learning platforms, online stores and data
+          dashboards. Whether I’m building a frontend or handling the
+          complete application, I focus on maintainable code, practical
+          solutions and clear updates throughout the project.
         </p>
       </div>
 

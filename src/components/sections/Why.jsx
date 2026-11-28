@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from '@utils/gsap'
 import {
-  Code2, TrendingUp, MessageSquare, Zap,
-  Shield, Lightbulb, Clock, Search,
+  Code2, TrendingUp, MessageSquare,
+  Shield, Clock, Search,
 } from 'lucide-react'
 
 const REASONS = [

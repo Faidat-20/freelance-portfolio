@@ -10,6 +10,7 @@ const SELECTED_PROJECTS = [
     category: 'Learning platform',
     role: 'Frontend Developer',
     image: '/images/projects/learnloop.png',
+    stack: ['React', 'Tailwind CSS', 'React Router', 'Recharts'],
     link: 'https://learnloopapp-frontend-web.vercel.app/',
     linkLabel: 'View live site',
     description:
@@ -21,6 +22,7 @@ const SELECTED_PROJECTS = [
     category: 'E-commerce',
     role: 'Full-Stack Developer',
     image: '/images/projects/jikes-cosmetics.png',
+    stack: ['Node.js', 'JavaScript', 'HTML', 'CSS'],
     link: 'https://github.com/Faidat-20/JC-Website',
     linkLabel: 'View source code',
     description:
@@ -33,6 +35,7 @@ const SELECTED_PROJECTS = [
     role: 'Full-Stack Developer',
     status: 'Paused',
     image: '/images/projects/jomi-global.png',
+    stack: ['PHP', 'JavaScript', 'CSS'],
     link: 'https://github.com/Faidat-20/JomiGlobal',
     linkLabel: 'View source code',
     description:
@@ -80,6 +83,19 @@ function ProjectCard({ project }) {
         <p className="mt-2 text-sm leading-6 text-[#4A4E69]">
           {project.description}
         </p>
+
+        {project.stack?.length > 0 && (
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {project.stack.map((technology) => (
+              <li
+                key={technology}
+                className="rounded-md bg-[#C9ADA7]/30 px-2 py-1 text-[10px] text-[#22223B]"
+              >
+                {technology}
+              </li>
+            ))}
+          </ul>
+        )}
 
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
           <span className="inline-block rounded-md bg-[#C9ADA7]/40 px-3 py-1.5 text-[11px] font-semibold">

@@ -70,9 +70,9 @@ export default function Hero() {
             data-hero-reveal
             className="mt-6 max-w-117.5 text-base leading-8 text-[#4A4E69]"
           >
-            I’m Faidat Egberinde, a full-stack developer. I build complete
-            web applications—from responsive interfaces to databases,
-            APIs and deployment.
+            I’m Faidat Egberinde, a full-stack developer building websites,
+            online stores and custom web applications. I can handle the
+            complete build or help improve an existing project.
           </p>
 
           <div
